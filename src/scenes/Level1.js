@@ -27,7 +27,7 @@ class Level1 extends Phaser.Scene {
         const p1Spawn = map.findObject("Object", obj => obj.name === "P1 Spawn");
         player = new Player(this, p1Spawn.x, p1Spawn.y, 'player');
         player.anims.play('idle');
-        
+
         this.physics.world.gravity.y = 2000;
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
         this.physics.add.collider(player, platformLayer);
@@ -35,8 +35,8 @@ class Level1 extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
 
         // setup camera
-        // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        // this.cameras.main.startFollow(player, true, 0.25, 0.25);
+        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cameras.main.startFollow(player, true, 0.25, 0.25);
     }
 
     update() {
