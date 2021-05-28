@@ -10,22 +10,26 @@
 // game configuration
 let config = {
     type: Phaser.CANVAS,
+    render: {
+        pixelArt: false
+    },
     width: 640,
     height: 480,
-    scale: {
-        autoCenter: Phaser.Scale.CENTER_BOTH
-    },
+    // scale: {
+    //     autoCenter: Phaser.Scale.CENTER_BOTH
+    // },
     physics: {
         default: 'arcade',
         arcade: {
-            // debug: true,
+            debug: true,
             gravity: {
                 x: 0,
                 y: 0
             }
         }
     },
-    scene: [ Load, Menu, Credits, Play, End ]
+    // zoom: 2,
+    scene: [ Load, Menu, Credits, Level1, End ]
 }
 // localStorage.clear();
 
@@ -35,5 +39,7 @@ let game = new Phaser.Game(config);
 // define golbal
 let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
+let cursors;
+let player;
 
 // initialize score and high score

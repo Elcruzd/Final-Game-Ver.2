@@ -2,33 +2,51 @@
 ** Name: Zhendong Jiang - programming, game design
 **       Nathan Pon - art, audio assets
 **       Jiahui Li - art, audio assets
-** Porject: Endless Runner
-** Game Title: Sharkbu-Sharkbu
-** Date: May 3, 2021
+** Porject: Final Game:
+** Game Title: 
+** Date: 
 */
 
-class Sharks extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, velocity) {
+class Player extends Phaser.Physics.Arcade.Sprite {
+    constructor(scene, x, y, texture, frame) {
         // call Phaser Physics Sprite constructor
-        super(scene, game.config.width + 32, Phaser.Math.Between(128/2, game.config.height - 128/2), 'sharks');
+        super(scene, x, y, texture, frame);
         scene.add.existing(this);           // add object to the existing scene
         scene.physics.add.existing(this);   // add to physics system
-        this.setSize(128, 32);
-        this.setVelocityX(velocity);
-        this.setImmovable();
-        this.newSharks = true;
+        this.setOrigin(0.5, 0.5);
+
+        this.ACCELERATION = 500;
+        this.MAX_X_VEL = 200;
+        this.MAX_Y_VEL = 2000;
+        this.DRAG = 600;
+        this.JUMP_VELOCITY = -600;
+        this.setBounce(0.1);
+        this.body.setSize(this.width - 9, this.height);
+        this.body.setOffset(0, 0);
+        this.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
+        this.body.setCollideWorldBounds(true);
     }
 
     update() {
-        // add new barrier when hits 1/4 game width
-        if(this.newSharks && this.x < game.config.width/4) {
-            this.newSharks = false;
-            this.scene.addSharks(this.velocity);
+        if(cursors.left.isDown) {
+            player.body.setAccelerationX(-this.ACCELERATION);
+            player.anims.play('run', true);
+            player.setFlip(true, false);
+        } else if(cursors.right.isDown) {
+            player.body.setAccelerationX(this.ACCELERATION);
+            player.anims.play('run', true);
+            player.resetFlip();
+        } else {
+            player.anims.play('idle');
+            player.body.setAccelerationX(0);
+            player.body.setDragX(this.DRAG);
         }
-        
-        // destroy shark if it reaches the left edge of the screen
-        if(this.x < -this.width) {
-            this.destroy();
+
+        if(!player.body.blocked.down) {
+            player.anims.play('jump');
+        }
+        if(player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
+            player.body.setVelocityY(this.JUMP_VELOCITY);
         }
     }
 }

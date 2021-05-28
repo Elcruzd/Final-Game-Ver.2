@@ -2,12 +2,12 @@
 ** Name: Zhendong Jiang - programming, game design
 **       Nathan Pon - art, audio assets
 **       Jiahui Li - art, audio assets
-** Porject: Endless Runner
-** Game Title: Sharkbu-Sharkbu
-** Date: May 3, 2021
+** Porject: Final Game:
+** Game Title: 
+** Date: 
 */
 
-class Whale extends Phaser.Physics.Arcade.Sprite {
+class Enemy extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, velocity) {
         // call Phaser Physics Sprite constructor
         super(scene, game.config.width + 32, Phaser.Math.Between(128/2, game.config.height - 128/2), 'whales');

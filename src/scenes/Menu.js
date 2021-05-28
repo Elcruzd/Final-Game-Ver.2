@@ -14,9 +14,9 @@ class Menu extends Phaser.Scene {
 
     create() {
         // place menu background
-        this.add.image(0, 0, 'menuBackground').setOrigin(0, 0);
+        // this.add.image(0, 0, 'menuBackground').setOrigin(0, 0);
         // place logo
-        this.add.image(game.config.width/2, game.config.height/4, 'logo').setOrigin(0.5);
+        // this.add.image(game.config.width/2, game.config.height/4, 'logo').setOrigin(0.5);
         
         // menu text configuration
         let menuConfig = {
@@ -38,12 +38,12 @@ class Menu extends Phaser.Scene {
         this.playButton.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
-                volume: 1,
+                volume: 0.2,
                 rate: 1,
                 loop: false 
             });
             this.selectSound.play();
-            this.scene.start('playScene');
+            this.scene.start('level1Scene');
         })
 
         // add credits button
@@ -53,7 +53,7 @@ class Menu extends Phaser.Scene {
         this.creditsButton.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
-                volume: 1,
+                volume: 0.2,
                 rate: 1,
                 loop: false 
             });
