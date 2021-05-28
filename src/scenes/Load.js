@@ -19,6 +19,10 @@ class Load extends Phaser.Scene {
         this.load.image('background', 'background.png')
         this.load.image('platforms', 'prop pack.png')
         // this.load.image('platforms2', 'tileset1.png')
+       
+       //Game assets
+        this.load.image ('crosshair', 'CHgame.png');
+        this.load.image ('projectile', 'bullet.png');
         
         // load tilemap.json
         this.load.tilemapTiledJSON('map1', 'level1.json');
@@ -26,7 +30,7 @@ class Load extends Phaser.Scene {
         // load audio asset
         this.load.audio('select', 'select.wav');
         this.load.audio('bgm', 'bgm.wav');
-
+        this.load.audio('gunshot', 'gunshot.wav');
         // load player atlas asset
         this.load.atlas('player', 'player.png', 'player.json');
 
