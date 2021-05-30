@@ -36,8 +36,8 @@ class Level1 extends Phaser.Scene {
   this.add.rectangle(this.cameras.x+16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setOrigin(0,0.7); 
   this.healthText = this.add.text(this.cameras.x+16,16, `Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' });
  
-  this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0xFEEEBC).setOrigin(-4,0.7);  
-  this.ammoText = this.add.text(16,32,`Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' });
+  //this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0xFEEEBC).setOrigin(-4,0.7);  
+  this.ammoText = this.add.text(16,45,`Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' });
   
 
   this.bossGroup = this.add.group({
@@ -90,6 +90,7 @@ class Level1 extends Phaser.Scene {
   }
 
     spawnBoss(){
+     
         this.boss1 = new Enemy(this, Phaser.Math.Between(game.config.width, game.config.width/2), Phaser.Math.Between(0,  game.config.height)).setOrigin(0.5,1);
         this.bossGroup.add(this.boss1);
        }
@@ -145,8 +146,16 @@ class Level1 extends Phaser.Scene {
      });
     this.collide.play();
   
-  
-    
+    this.replenishAmmo(sprite);
+  }
+
+  replenishAmmo(sprite) {
+    if(sprite.isDead())
+    {
+      this.ammoCount += 10
+      this.ammoText.text = `Ammo: ${this.ammoCount}`;
+    }  
+ 
   }
 
 }
