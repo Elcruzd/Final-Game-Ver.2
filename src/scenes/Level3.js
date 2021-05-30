@@ -47,9 +47,6 @@ this.ammoText = this.add.text(this.cameras.x+32,45,`Ammo: ${this.ammoCount}`, { 
  const enemySpawn = map3.findObject("Enemy", obj => obj.name === "e3Spawn");
  this.boss1 = new Enemy( this, enemySpawn.x, enemySpawn.y);
 
- 
- const enemySpawn = map3.findObject("Enemy", obj => obj.name === "e3Spawn");
- this.boss1 = new Enemy( this, enemySpawn.x, enemySpawn.y);
 
  this.shooting();              
 cursors = this.input.keyboard.createCursorKeys();
