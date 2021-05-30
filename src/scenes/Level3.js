@@ -40,13 +40,18 @@ this.healthText = this.add.text(this.cameras.x+16,16, `Health: ${this.playerHP}`
 this.ammoText = this.add.text(this.cameras.x+32,45,`Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' });
 
 
+this.bossGroup = this.add.group({
+    runChildUpdate:true
+  })
 // setup camera
  this.cameras.main.setBounds(0, 0, map3.widthInPixels, map3.heightInPixels);
  this.cameras.main.startFollow(player, true, 0.25, 0.25);
 
+ //Temporary enemy placement
  const enemySpawn = map3.findObject("Enemy", obj => obj.name === "e3Spawn");
  this.boss1 = new Enemy( this, enemySpawn.x, enemySpawn.y);
-
+ this.boss1 = new Enemy( this, enemySpawn.x+300, enemySpawn.y);
+ this.bossGroup.add(this.boss1);
 
  this.shooting();              
 cursors = this.input.keyboard.createCursorKeys();
@@ -83,12 +88,49 @@ shooting(){
         this.p1.y = pointer.y;
         })
         player.update();
+
+        this.physics.overlap(player, this.bossGroup, this.takeDamage, null, this)
+        this.physics.overlap(this.bossGroup, this.bullet, this.hitEnemy, null, this)
         if(Phaser.Input.Keyboard.JustDown(this.swap)) {
             this.scene.start("level1Scene");
         }
     }
 
-
+    takeDamage(player, sprite){
+        console.log('hit');
+        this.playerHP -=10
+        this.healthText.text = `Health: ${this.playerHP}`
+        
+        this.cameras.main.shake(250, 0.0075);
+        if( this.playerHP <=0)
+         {
+          this.scene.start("menuScene");
+          }
+       }
+    
+       hitEnemy(sprite, bullet) {
+        console.log('hit');
+        sprite.hit();
+        bullet.destroy();
+        this.collide = this.sound.add('monsterHit', {
+          mute: false,
+          volume: 1,
+          rate: 1,
+          loop: false 
+         });
+        this.collide.play();
+      
+        this.replenishAmmo(sprite);
+      }
+    
+      replenishAmmo(sprite) {
+        if(sprite.isDead())
+        {
+          this.ammoCount += 10
+          this.ammoText.text = `Ammo: ${this.ammoCount}`;
+        }  
+     
+      }
 
 
 }

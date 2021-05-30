@@ -46,7 +46,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             player.anims.play('jump');
         }
         if(player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
-            player.body.setVelocityY(this.JUMP_VELOCITY);
+            player.body.setVelocityY(this.JUMP_VELOCITY)
+            
         }
+
     }
+
+    
+   
 }

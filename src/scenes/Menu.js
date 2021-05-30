@@ -61,6 +61,7 @@ class Menu extends Phaser.Scene {
             this.scene.start('creditScene');
         })
         // add game instructions
+        this.add.rectangle(game.config.width/2, game.config.height/2 + 190, 0xFEEEBC).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 160, 'USE ARROWS TO MOVE', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 140, 'MOVE MOUSE TO AIM AND CLICK TO SHOOT', menuConfig).setOrigin(0.5);
         
