@@ -29,7 +29,7 @@ let config = {
         }
     },
     // zoom: 2,
-    scene: [ Load, Menu, Credits, Level1, End ]
+    scene: [ Load, Menu, Credits, Level1, Level3, End ]
 }
 // localStorage.clear();
 
@@ -41,5 +41,5 @@ let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
 let cursors;
 let player;
-
+let ammoCount;
 // initialize score and high score
