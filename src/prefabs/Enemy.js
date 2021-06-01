@@ -8,15 +8,15 @@
 */
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x,y) {
+    constructor(scene, x,y,texture, frame) {
         // call Phaser Physics Sprite constructor
-        super (scene,x, y, 'boss');
+        super (scene,x, y, texture, frame);
         scene.add.existing(this);           // add object to the existing scene
         scene.physics.add.existing(this);
-        this.setSize(128, 32);
         this.newMonster = true;
         this.hP = 5; //set hitpoints
         this.body.allowGravity = false;  //prevent sprite from falling
+        this.MAX_X_VEL = 200;
 
 
         /*
@@ -30,26 +30,16 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.newWhale = true;
         */
 
-
         
     }
-
     update() {
-        /*
-        if(this.newWhale && this.x < game.config.width/8) {
-            this.newWhale = false;
-            this.scene.addWhale(this.velocity);
-        }
-
-        // destroy whale if it reaches the left edge of the screen
-        if(this.x < -this.width) {
-            this.destroy();
-        }*/
+        this.anims.play('walk', true);
     }
 
 
     hit() {
         console.log('hit2');
+        this.anims.play('hurt', true)
         this.hP= this.hP-1
         this.isDead();
         
@@ -58,8 +48,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     isDead() {
          //Destroy sprite in multiple hits
          if(this.hP <= 0)
-         {
-             this.destroy();
+         {  
+            this.destroy();
              return true;
          }
     }
