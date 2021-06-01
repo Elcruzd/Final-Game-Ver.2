@@ -24,7 +24,6 @@ class Load extends Phaser.Scene {
        //Game assets
         this.load.image ('crosshair', 'CHgame.png');
         this.load.image ('projectile', 'bullet.png');
-        this.load.image('boss', 'enemy1.png')
         
         // load tilemap.json Data
         this.load.tilemapTiledJSON('map1', 'level1.json');
@@ -38,6 +37,10 @@ class Load extends Phaser.Scene {
         // load player atlas asset
         this.load.atlas('player', 'player.png', 'player.json');
 
+        //load enemy asset
+        this.load.atlas('enemy1walk', 'enemy1walk.png', 'enemy1walk.json');
+        this.load.atlas('enemy1Death', 'enemy1Death.png', 'enemy1Death.json');
+        this.load.atlas('enemy1Hurt','enemy1Hurt.png','enemy1Hurt.json')
         // load custom spritesheet
         // this.load.spritesheet('run', 'run.png', {
         //     frameWidth: 48,
@@ -112,6 +115,33 @@ class Load extends Phaser.Scene {
             }),
             repeat: -1,
             frameRate: 10
+        });
+
+        //Enemy animations
+        this.anims.create({
+            key: 'walk',
+            frames: this.anims.generateFrameNames('enemy1walk', {
+                prefix: 'enemy1walk_',
+                start: 1,
+                end: 3,
+                suffix: '.png',
+                zeroPad: 2,
+            }),
+            repeat: -1,
+            frameRate: 5
+        });
+
+        this.anims.create({
+            key: 'hurt',
+            frames: this.anims.generateFrameNames('enemy1Hurt', {
+                prefix: 'enemy1hurt_',
+                start: 1,
+                end: 2,
+                suffix: '.png',
+                zeroPad: 2,
+            }),
+            repeat: -1,
+            frameRate: 2
         });
         // this.anims.create({
         //     key: 'bloods',
