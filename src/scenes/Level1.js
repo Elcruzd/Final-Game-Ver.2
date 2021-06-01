@@ -33,11 +33,11 @@ class Level1 extends Phaser.Scene {
 
 //Crosshair and UI
   this.p1 = this.add.sprite(0, 0, 'crosshair');
-  this.add.rectangle(this.cameras.x+16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setOrigin(0,0.7); 
-  this.healthText = this.add.text(this.cameras.x+16,16, `Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' });
+ // this.add.rectangle(16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setOrigin(0,0.7); 
+  this.healthText = this.add.text(16,16, `Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
  
   //this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0xFEEEBC).setOrigin(-4,0.7);  
-  this.ammoText = this.add.text(16,45,`Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' });
+  this.ammoText = this.add.text(16,32,`Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
   
 
   this.bossGroup = this.add.group({
@@ -50,7 +50,7 @@ class Level1 extends Phaser.Scene {
  this.physics.add.collider(player, platformLayer);
         
  cursors = this.input.keyboard.createCursorKeys();
- this.swap = this.input.keyboard.addKey('S');
+ this.swap = this.input.keyboard.addKey('S');   //Temporarily transiiton between scenes
 
  // setup camera
    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -69,10 +69,9 @@ class Level1 extends Phaser.Scene {
   shooting(){
            //Fire projectile on click
            this.input.on('pointerdown', (pointer) =>{ 
-
             //Position Projectile to spawn from player's position
             this.bullet = new projectile (this, player.x, player.y, 'projectile');
-     
+            player.anims.play('attack', true);
             this.bullet.body.velocity.x =this.p1.x-300; //projectile physics
             this.bullet.body.velocity.y =this.p1.y-300; 
            
@@ -87,12 +86,15 @@ class Level1 extends Phaser.Scene {
              });
                this.sfx.play();   
              })
+            
+        
   }
 
     spawnBoss(){
      
-        this.boss1 = new Enemy(this, Phaser.Math.Between(game.config.width, game.config.width/2), Phaser.Math.Between(0,  game.config.height)).setOrigin(0.5,1);
+        this.boss1 = new Enemy(this, Phaser.Math.Between(game.config.width, game.config.width/2, 'enemy1walk'), Phaser.Math.Between(0,  game.config.height)).setOrigin(0.5,1);
         this.bossGroup.add(this.boss1);
+        
        }
   
   //Have enemies spawn repeatedly every ten seconds     
@@ -117,14 +119,19 @@ class Level1 extends Phaser.Scene {
         this.physics.overlap(this.bossGroup, this.bullet, this.hitEnemy, null, this)
         
         player.update();
-       
+        
+        if( this.ammoCount <=0)
+        {
+         this.scene.start("menuScene");
+         }
+         
         if(Phaser.Input.Keyboard.JustDown(this.swap)) {
           this.scene.start("level3Scene");
          }
     }
    takeDamage(player, sprite){
     console.log('hit');
-    this.playerHP -=10
+    this.playerHP -=1
     this.healthText.text = `Health: ${this.playerHP}`
     
     this.cameras.main.shake(250, 0.0075);
@@ -152,10 +159,14 @@ class Level1 extends Phaser.Scene {
   replenishAmmo(sprite) {
     if(sprite.isDead())
     {
+      //this.boss1.anims.play('death', true);
       this.ammoCount += 10
       this.ammoText.text = `Ammo: ${this.ammoCount}`;
     }  
- 
-  }
+
+ }
+
+
+
 
 }
