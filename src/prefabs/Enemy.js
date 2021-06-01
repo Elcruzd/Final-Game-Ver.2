@@ -36,8 +36,6 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     update() {
         this.anims.play('walk', true);
         this.body.setAccelerationX(-this.MAX_X_VEL)
-        this.body.setFlip(true, false);
-        this.body.resetFlip();
         
     }
 
