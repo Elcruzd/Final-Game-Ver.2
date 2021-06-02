@@ -41,5 +41,6 @@ let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
 let cursors;
 let player;
+let enemy1;
 let ammoCount;
 // initialize score and high score

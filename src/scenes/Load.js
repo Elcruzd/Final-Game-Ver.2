@@ -37,34 +37,23 @@ class Load extends Phaser.Scene {
         this.load.audio('monsterHit', 'monsterHit.wav');
         // load player atlas asset
         this.load.atlas('player', 'player.png', 'player.json');
+        this.load.atlas('enemy1', 'enemy1.png', 'enemy1.json');
+        this.load.atlas('enemy2', 'enemy2.png', 'enemy2.json');
 
-        // load custom spritesheet
-        // this.load.spritesheet('run', 'run.png', {
-        //     frameWidth: 48,
-        //     frameHeight: 48,
-        //     startFrame: 0,
-        //     endFrame: 5
-        // });
-        // this.load.spritesheet('bloodExplode', 'blood.png', {
-        //     frameWidth: 64,
-        //     frameHeight: 32,
-        //     startFrame: 0,
-        //     endFrame: 9
-        // });
+        // create loading bar
+        this.add.text(game.config.width / 2, (game.config.height / 2) - 50, 'Loading...').setOrigin(0.5);
+        let loadingBar = this.add.graphics();
+        this.load.on("progress", (value) => {
+            loadingBar.clear();
+            loadingBar.fillStyle(0xFFFFFF, 1);
+            loadingBar.fillRect(0, game.config.height / 2, game.config.width * value, 5);
+        })
+        this.load.on("complete", () => {
+            loadingBar.destroy();
+        })
     }
 
     create() {
-        // animation config
-        // this.anims.create({
-        //     key: 'running',
-        //     frames: this.anims.generateFrameNumbers('run', {
-        //         start: 0,
-        //         end: 5,
-        //         first: 0
-        //     }),
-        //     repeat: -1,
-        //     frameRate: 10
-        // });
         this.anims.create({
             key: 'idle',
             frames: this.anims.generateFrameNames('player', {
@@ -113,15 +102,126 @@ class Load extends Phaser.Scene {
             repeat: -1,
             frameRate: 10
         });
-        // this.anims.create({
-        //     key: 'bloods',
-        //     frames: this.anims.generateFrameNumbers('bloodExplode', {
-        //         start: 0,
-        //         end: 9,
-        //         first: 0
-        //     }),
-        //     frameRate: 30
-        // });
+        this.anims.create({
+            key: 'enemyIdle',
+            frames: this.anims.generateFrameNames('enemy1', {
+                prefix: 'walk/enemy1walk',
+                start: 1,
+                end: 1,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            // repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemyWalk',
+            frames: this.anims.generateFrameNames('enemy1', {
+                prefix: 'walk/enemy1walk',
+                start: 1,
+                end: 4,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemyAttack',
+            frames: this.anims.generateFrameNames('enemy1', {
+                prefix: 'attack/enemy1attack',
+                start: 1,
+                end: 6,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemyHurt',
+            frames: this.anims.generateFrameNames('enemy1', {
+                prefix: 'hurt/enemy1hurt',
+                start: 1,
+                end: 2,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemyDeath',
+            frames: this.anims.generateFrameNames('enemy1', {
+                prefix: 'death/enemy1death',
+                start: 1,
+                end: 4,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy2Idle',
+            frames: this.anims.generateFrameNames('enemy2', {
+                prefix: 'walk/enemy2walk',
+                start: 1,
+                end: 1,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            // repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy2Walk',
+            frames: this.anims.generateFrameNames('enemy2', {
+                prefix: 'walk/enemy2walk',
+                start: 1,
+                end: 4,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy2Attack',
+            frames: this.anims.generateFrameNames('enemy2', {
+                prefix: 'attack/enemy2attack',
+                start: 1,
+                end: 6,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy2Hurt',
+            frames: this.anims.generateFrameNames('enemy2', {
+                prefix: 'hurt/enemy2hurt',
+                start: 1,
+                end: 2,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy2Death',
+            frames: this.anims.generateFrameNames('enemy2', {
+                prefix: 'death/enemy2death',
+                start: 1,
+                end: 4,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
 
         this.scene.start('menuScene');  // move to menu scene
     }

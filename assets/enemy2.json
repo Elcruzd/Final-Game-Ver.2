@@ -1,0 +1,356 @@
+{
+	"textures": [
+		{
+			"image": "enemy2.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 254,
+				"h": 128
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "attack/enemy2attack0005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 71,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 4,
+						"w": 71,
+						"h": 27
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 71,
+						"h": 27
+					}
+				},
+				{
+					"filename": "attack/enemy2attack0004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 70,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 5,
+						"w": 70,
+						"h": 27
+					},
+					"frame": {
+						"x": 74,
+						"y": 1,
+						"w": 70,
+						"h": 27
+					}
+				},
+				{
+					"filename": "attack/enemy2attack0006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 58,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 58,
+						"h": 32
+					},
+					"frame": {
+						"x": 146,
+						"y": 1,
+						"w": 58,
+						"h": 32
+					}
+				},
+				{
+					"filename": "death/enemy2death0001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 47,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 47,
+						"h": 36
+					},
+					"frame": {
+						"x": 206,
+						"y": 1,
+						"w": 47,
+						"h": 36
+					}
+				},
+				{
+					"filename": "death/enemy2death0002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 56,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 56,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 30,
+						"w": 56,
+						"h": 32
+					}
+				},
+				{
+					"filename": "attack/enemy2attack0001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 48,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 36
+					},
+					"frame": {
+						"x": 59,
+						"y": 30,
+						"w": 48,
+						"h": 36
+					}
+				},
+				{
+					"filename": "walk/enemy2walk0001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 48,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 36
+					},
+					"frame": {
+						"x": 59,
+						"y": 30,
+						"w": 48,
+						"h": 36
+					}
+				},
+				{
+					"filename": "walk/enemy2walk0004.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 48,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 36
+					},
+					"frame": {
+						"x": 1,
+						"y": 64,
+						"w": 48,
+						"h": 36
+					}
+				},
+				{
+					"filename": "death/enemy2death0003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 62,
+						"h": 25
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 62,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 102,
+						"w": 62,
+						"h": 25
+					}
+				},
+				{
+					"filename": "attack/enemy2attack0003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 46,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 46,
+						"h": 32
+					},
+					"frame": {
+						"x": 51,
+						"y": 68,
+						"w": 46,
+						"h": 32
+					}
+				},
+				{
+					"filename": "death/enemy2death0004.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 59,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 59,
+						"h": 24
+					},
+					"frame": {
+						"x": 65,
+						"y": 102,
+						"w": 59,
+						"h": 24
+					}
+				},
+				{
+					"filename": "walk/enemy2walk0003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 47,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 47,
+						"h": 36
+					},
+					"frame": {
+						"x": 109,
+						"y": 35,
+						"w": 47,
+						"h": 36
+					}
+				},
+				{
+					"filename": "hurt/enemy2hurt0001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 46,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 46,
+						"h": 35
+					},
+					"frame": {
+						"x": 158,
+						"y": 35,
+						"w": 46,
+						"h": 35
+					}
+				},
+				{
+					"filename": "hurt/enemy2hurt0002.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 46,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 46,
+						"h": 35
+					},
+					"frame": {
+						"x": 206,
+						"y": 39,
+						"w": 46,
+						"h": 35
+					}
+				},
+				{
+					"filename": "walk/enemy2walk0002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 48,
+						"h": 35
+					},
+					"frame": {
+						"x": 126,
+						"y": 73,
+						"w": 48,
+						"h": 35
+					}
+				},
+				{
+					"filename": "attack/enemy2attack0002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 47,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 47,
+						"h": 33
+					},
+					"frame": {
+						"x": 176,
+						"y": 76,
+						"w": 47,
+						"h": 33
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:8c852a7bb28332730cc428ddecd1047c:d01712919bb2d1561409f0c5254ac1ff:80607114553ff3873e2e8a898e236602$"
+	}
+}

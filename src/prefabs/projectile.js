@@ -12,4 +12,4 @@ class projectile extends Phaser.Physics.Arcade.Sprite {
 
       
      }
-    }
+}

@@ -1,0 +1,398 @@
+{
+	"textures": [
+		{
+			"image": "enemy1.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 50,
+				"h": 859
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "walk/enemy1walk0002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 50,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 48,
+						"h": 50
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 48,
+						"h": 50
+					}
+				},
+				{
+					"filename": "death/enemy1death0001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 52,
+						"h": 52
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 48,
+						"h": 49
+					},
+					"frame": {
+						"x": 1,
+						"y": 53,
+						"w": 48,
+						"h": 49
+					}
+				},
+				{
+					"filename": "death/enemy1death0002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 52,
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 4,
+						"w": 48,
+						"h": 41
+					},
+					"frame": {
+						"x": 1,
+						"y": 104,
+						"w": 48,
+						"h": 41
+					}
+				},
+				{
+					"filename": "walk/enemy1walk0003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 53
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 47,
+						"h": 51
+					},
+					"frame": {
+						"x": 1,
+						"y": 147,
+						"w": 47,
+						"h": 51
+					}
+				},
+				{
+					"filename": "hurt/enemy1hurt0001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 51,
+						"h": 52
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 47,
+						"h": 50
+					},
+					"frame": {
+						"x": 1,
+						"y": 200,
+						"w": 47,
+						"h": 50
+					}
+				},
+				{
+					"filename": "walk/enemy1walk0006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 50,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 47,
+						"h": 50
+					},
+					"frame": {
+						"x": 1,
+						"y": 252,
+						"w": 47,
+						"h": 50
+					}
+				},
+				{
+					"filename": "attack/enemy1attack0006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 51
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 47,
+						"h": 49
+					},
+					"frame": {
+						"x": 1,
+						"y": 304,
+						"w": 47,
+						"h": 49
+					}
+				},
+				{
+					"filename": "hurt/enemy1hurt0002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 49,
+						"h": 49
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 47,
+						"h": 49
+					},
+					"frame": {
+						"x": 1,
+						"y": 355,
+						"w": 47,
+						"h": 49
+					}
+				},
+				{
+					"filename": "walk/enemy1walk0001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 47,
+						"h": 49
+					},
+					"frame": {
+						"x": 1,
+						"y": 406,
+						"w": 47,
+						"h": 49
+					}
+				},
+				{
+					"filename": "attack/enemy1attack0001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 47,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 47,
+						"h": 48
+					},
+					"frame": {
+						"x": 1,
+						"y": 457,
+						"w": 47,
+						"h": 48
+					}
+				},
+				{
+					"filename": "attack/enemy1attack0002.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 47,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 47,
+						"h": 48
+					},
+					"frame": {
+						"x": 1,
+						"y": 507,
+						"w": 47,
+						"h": 48
+					}
+				},
+				{
+					"filename": "death/enemy1death0003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 50,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 5,
+						"w": 47,
+						"h": 27
+					},
+					"frame": {
+						"x": 1,
+						"y": 557,
+						"w": 47,
+						"h": 27
+					}
+				},
+				{
+					"filename": "death/enemy1death0004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 50,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 47,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 586,
+						"w": 47,
+						"h": 23
+					}
+				},
+				{
+					"filename": "walk/enemy1walk0005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 52,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 46,
+						"h": 50
+					},
+					"frame": {
+						"x": 1,
+						"y": 611,
+						"w": 46,
+						"h": 50
+					}
+				},
+				{
+					"filename": "walk/enemy1walk0004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 51,
+						"h": 53
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 4,
+						"w": 46,
+						"h": 49
+					},
+					"frame": {
+						"x": 1,
+						"y": 663,
+						"w": 46,
+						"h": 49
+					}
+				},
+				{
+					"filename": "attack/enemy1attack0003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 39,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 39,
+						"h": 48
+					},
+					"frame": {
+						"x": 1,
+						"y": 714,
+						"w": 39,
+						"h": 48
+					}
+				},
+				{
+					"filename": "attack/enemy1attack0004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 40,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 37,
+						"h": 45
+					},
+					"frame": {
+						"x": 1,
+						"y": 764,
+						"w": 37,
+						"h": 45
+					}
+				},
+				{
+					"filename": "attack/enemy1attack0005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 36,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 35,
+						"h": 47
+					},
+					"frame": {
+						"x": 1,
+						"y": 811,
+						"w": 35,
+						"h": 47
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:3d04cd3547e05437b7694fe9af19644a:1a0b82d2c252856534dac18bb107dd2e:25b65a864ad92a9a51374ffe59991978$"
+	}
+}
