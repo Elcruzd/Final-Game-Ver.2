@@ -65,7 +65,7 @@
                 {
                  "height":0,
                  "id":9,
-                 "name":"Enemy Spawn",
+                 "name":"Enemy Spawn1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -77,7 +77,7 @@
                 {
                  "height":0,
                  "id":10,
-                 "name":"Enemy Spawn",
+                 "name":"Enemy Spawn3",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -89,7 +89,7 @@
                 {
                  "height":0,
                  "id":11,
-                 "name":"Enemy Spawn",
+                 "name":"Enemy Spawn4",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -101,7 +101,7 @@
                 {
                  "height":0,
                  "id":12,
-                 "name":"Enemy Spawn",
+                 "name":"Enemy Spawn2",
                  "point":true,
                  "rotation":0,
                  "type":"",

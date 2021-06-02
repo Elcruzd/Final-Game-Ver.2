@@ -44,11 +44,11 @@ class Level1 extends Phaser.Scene {
             runChildUpdate: true
         });
 
-        const enemySpawn = map.findObject("Object", obj => obj.name === "Enemy Spawn");
-        enemy1 = new Enemy(this, enemySpawn.x, enemySpawn.y, 'enemy1');
-        this.enemyGroup.add(enemy1);
+        // const enemySpawn = map.findObject("Object", obj => obj.name === "Enemy Spawn");
+        // enemy1 = new Enemy(this, enemySpawn.x, enemySpawn.y, 'enemy1');
+        // this.enemyGroup.add(enemy1);
 
-        // this.spawnEnemies1();
+        this.spawnEnemies1();
 
         this.physics.world.gravity.y = 2000;
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
@@ -90,20 +90,21 @@ class Level1 extends Phaser.Scene {
             this.ammoText.text = `Ammo: ${this.ammoCount}`;   
         })
     }
-    // spawnEnemies1() {
-    //     // const enemySpawn = this.map.getObjectLayer('Enemy1');
-    //     this.enemyGroup = this.add.group({
-    //         // runChildUpdate: true
-    //     });
-    //     // enemySpawn.objects.forEach(objects => {
-    //     //     this.addEnemy(objects);
-    //     // })
-    //     this.addEnemy();
-    // }
+    spawnEnemies1() {
+        // const enemySpawn = this.map.getObjectLayer('Enemy1');
+        this.enemyGroup = this.add.group({
+            // runChildUpdate: true
+        });
+        // enemySpawn.objects.forEach(objects => {
+        //     this.addEnemy(objects);
+        // })
+        this.addEnemy();
+    }
 
     addEnemy() {
         // const enemySpawn = this.map.findObject("Object", obj => obj.name === "Enemy Spawn");
-        // enemy1 = new Enemy(this, -100, Phaser.Math.Between(game.config.width, game.config.width/2), Phaser.Math.Between(0,  game.config.height), 4770);
+        let movementSpeed = Phaser.Math.Between(0, 50);
+        enemy1 = new Enemy(this, -100, movementSpeed, 400);
         this.enemyGroup.add(enemy1);
     }
     // spawnBoss(){
