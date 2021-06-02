@@ -22,9 +22,9 @@ class Level1 extends Phaser.Scene {
         this.playerHP = 100;
         this.ammoCount = 50;
         
-        // platformLayer.setCollisionByProperty({ 
-        //     collides: true 
-        // });
+       platformLayer.setCollisionByProperty({ 
+             collides: true 
+       });
         platformLayer.setCollisionByExclusion(-1, true);
 
         const p1Spawn = map.findObject("Object", obj => obj.name === "P1 Spawn");
@@ -44,10 +44,11 @@ class Level1 extends Phaser.Scene {
     runChildUpdate:true
   })
 
-
+//Arcade physics
  this.physics.world.gravity.y = 2000;
  this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
  this.physics.add.collider(player, platformLayer);
+
         
  cursors = this.input.keyboard.createCursorKeys();
  this.swap = this.input.keyboard.addKey('S');   //Temporarily transiiton between scenes
@@ -63,10 +64,16 @@ class Level1 extends Phaser.Scene {
       }) 
            
    this.shooting();
-        
+
+
+   //Destroy bullet on collison with platforms
+   //this.physics.add.collider(this.bullet, platformLayer,(obj1, obj2)=> {obj1.destroy()}); 
+
+   //prevent enemies from going through platform layer (partially working)
+ this.physics.add.collider(this.bossGroup, platformLayer); 
 }
 
-  shooting(){
+ shooting(){
            //Fire projectile on click
            this.input.on('pointerdown', (pointer) =>{ 
             //Position Projectile to spawn from player's position
@@ -74,7 +81,8 @@ class Level1 extends Phaser.Scene {
             player.anims.play('attack', true);
             this.bullet.body.velocity.x =this.p1.x-300; //projectile physics
             this.bullet.body.velocity.y =this.p1.y-300; 
-           
+            
+           //Update UI
             this.ammoCount -= 1
             this.ammoText.text = `Ammo: ${this.ammoCount}`;
             
@@ -91,10 +99,8 @@ class Level1 extends Phaser.Scene {
   }
 
     spawnBoss(){
-     
-        this.boss1 = new Enemy(this, Phaser.Math.Between(game.config.width, game.config.width/2, 'enemy1walk'), Phaser.Math.Between(0,  game.config.height)).setOrigin(0.5,1);
+        this.boss1 = new Enemy(this, Phaser.Math.Between(game.config.width, game.config.width/2, 'enemy1walk'), Phaser.Math.Between(0, game.config.height)).setOrigin(0.5,1);
         this.bossGroup.add(this.boss1);
-        
        }
   
   //Have enemies spawn repeatedly every ten seconds     
@@ -102,14 +108,13 @@ class Level1 extends Phaser.Scene {
   
     this.time.delayedCall(10000, () => {
       this.loopCall();  
-    })
+    });
   this.spawnBoss();
-  
   
   }
 
     update() {
-
+      
       this.input.on('pointermove', (pointer) =>{ 
         this.p1.x = pointer.x;
         this.p1.y = pointer.y;
@@ -120,6 +125,7 @@ class Level1 extends Phaser.Scene {
         
         player.update();
         
+        //Game over/Run out of ammo
         if( this.ammoCount <=0)
         {
          this.scene.start("menuScene");
@@ -129,6 +135,7 @@ class Level1 extends Phaser.Scene {
           this.scene.start("level3Scene");
          }
     }
+
    takeDamage(player, sprite){
     console.log('hit');
     this.playerHP -=1
@@ -165,8 +172,7 @@ class Level1 extends Phaser.Scene {
     }  
 
  }
-
-
+ 
 
 
 }
