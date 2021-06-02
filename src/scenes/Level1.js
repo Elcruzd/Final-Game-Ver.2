@@ -34,10 +34,10 @@ class Level1 extends Phaser.Scene {
         //Crosshair and UI
         // this.p1 = this.add.sprite(0, 0, 'crosshair');
         this.add.rectangle(this.cameras.x+16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setOrigin(0,0.7); 
-        this.healthText = this.add.text(this.cameras.x + 16, 16 , `Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' });
+        this.healthText = this.add.text(this.cameras.x + 16, 16 , `Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
         
         //this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0xFEEEBC).setOrigin(-4,0.7);  
-        this.ammoText = this.add.text(16, 45, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' });
+        this.ammoText = this.add.text(16, 32, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
         
 
         this.enemyGroup = this.add.group({
@@ -138,7 +138,7 @@ class Level1 extends Phaser.Scene {
 
     takeDamage(player, sprite){
         console.log('hit');
-        this.playerHP -=10
+        this.playerHP -=1
         this.healthText.text = `Health: ${this.playerHP}`
         
         this.cameras.main.shake(250, 0.0075);
