@@ -52,14 +52,15 @@ class Level1 extends Phaser.Scene {
         this.enemyGroup = this.add.group({
             runChildUpdate: true
         });
-
         this.addEnemy(map);
+        
      
         this.physics.world.gravity.y = 2000;
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
         this.physics.add.collider(player, platformLayer);
-        this.physics.add.collider(enemy1, platformLayer);
+        this.physics.add.collider(this.enemyGroup, platformLayer);
         this.physics.add.collider(player.bulletGroup, platformLayer,(obj1,obj2)=> obj1.destroy());
+      
                 
         cursors = this.input.keyboard.createCursorKeys();
         this.swap = this.input.keyboard.addKey('S');
@@ -67,6 +68,8 @@ class Level1 extends Phaser.Scene {
         // setup camera
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(player, true, 0.25, 0.25);
+
+     //  this.Exit = map.findObject("Exit", obj => obj.name === "nextLevel");
  
     }
 
@@ -88,12 +91,16 @@ class Level1 extends Phaser.Scene {
         //     })
             player.update();
             
+            
             this.physics.add.overlap(this.enemyGroup, player, this.takeDamage, null, this)
             this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
+
+           // this.physics.add.collider(player, this.Exit, this.exitCall(), null, this)
         
-            if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-            this.scene.start("level3Scene");
-        }
+          //  if(Phaser.Input.Keyboard.JustDown(this.swap)) {
+          //  this.scene.start("level3Scene");
+            
+     //   }
     }
 
     takeDamage(sprite, player){
@@ -118,63 +125,12 @@ class Level1 extends Phaser.Scene {
             this.ammoText.text = `Ammo: ${this.ammoCount}`;
         }  
     }
-
-  
-
+/*
+  exitCall() {
+    this.scene.start("level3Scene");
+  }*/
 
 
 }
 
-//REFERENCE FOR OLD CODE
-
-     // this.time.delayedCall(5000, () => {
-        //     this.loopCall();  
-        // }) 
-           
-
-   // spawnBoss(){
-    //     this.boss1 = new Enemy(this, Phaser.Math.Between(game.config.width, game.config.width/2), Phaser.Math.Between(0,  game.config.height)).setOrigin(0.5,1);
-    //     this.bossGroup.add(this.boss1);
-    // }
-    
-    // // Have enemies spawn repeatedly every ten seconds     
-    // loopCall() {
-    //     this.time.delayedCall(10000, () => {
-    //     this.loopCall();  
-    //     })
-    //     this.spawnBoss();
-    // }
-
-         //Spawn Enemies
-      /*  this.enemyGroup = this.add.group({
-           runChildUpdate: true
-        });*/
-     
-       // const enemySpawn = map.getObjectLayer('Enemy1');
-      /*  for (let i=0;  i< 4; i++) {
-            let enemySpawn1 = map.findObject("Enemy1", obj => obj.name === "Enemy Spawn" + (i + 1).toString());
-              let movementSpeed = Phaser.Math.Between(0, 50);
-              let enemy = new Enemy(this, movementSpeed, enemySpawn1.x, enemySpawn1.y);
-              this.enemyGroup.add(enemy);
-        }*/
-        //enemySpawn.objects.forEach(objects => {
-
-          
-            /*
-            let enemySpawn1 = map.findObject("Enemy1", obj => obj.name === "Enemy Spawn1") 
-            let movementSpeed = Phaser.Math.Between(0, 50);
-            let enemy = new Enemy(this, movementSpeed, enemySpawn1.x, enemySpawn1.y);
-            this.enemyGroup.add(enemy);
-            */
   
-        //});  
-
-        /* addEnemy(map) {
-    /*
-     for (i;  i< 4; i++) {
-    let enemySpawn = map.findObject("Enemy1", obj => obj.name === "Enemy Spawn" + (i + 1).toString());
-      let movementSpeed = Phaser.Math.Between(0, 50);
-      let enemy = new Enemy(this, movementSpeed, enemySpawn.x, enemySpawn.y);
-      this.enemyGroup.add(enemy);
-      }*/
-  //}
