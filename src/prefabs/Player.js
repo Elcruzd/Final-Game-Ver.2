@@ -15,6 +15,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);   // add to physics system
         this.setOrigin(0.5, 0.5);
 
+        this.playerHP = 100;
+        this.ammoCount = 50;
+
         this.ACCELERATION = 500;
         this.MAX_X_VEL = 200;
         this.MAX_Y_VEL = 2000;
@@ -55,6 +58,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
             player.body.setVelocityY(this.JUMP_VELOCITY);
         }
+       
+        
     }
 
     shoot(pointer) {
@@ -65,17 +70,27 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             bullet.body.setAllowGravity(false);
             this.scene.physics.velocityFromAngle(Phaser.Math.RadToDeg(Phaser.Math.Angle.BetweenPoints(player, pointer)), 500, bullet.body.velocity);
             // bullet.body.setAngularVelocity(1000);
-            
+            this.scene.sfx = this.scene.sound.add('gunshot', {
+                mute: false,
+                volume: 0.1,
+                rate: 1,
+                loop: false 
+            });
+            this.scene.sfx.play();
             this.bulletGroup.add(bullet);
 
             this.scene.time.delayedCall(2000, () => {
-                bullet.destroy();
+                bullet.destroy();       
             })
 
             this.attack = false;
             this.scene.time.delayedCall(100, () => {
                 this.attack = true;
             })
+            this.scene.ammoCount -= 1
+            this.scene.ammoText.text = `Ammo: ${this.scene.ammoCount}`;  
         }
+        //Bullet collison with enemies
+        this.scene.physics.collider(this.scene.enemyGroup, this.scene.bulletGroup, this.scene.hitEnemy, null, this)
     }
 }
