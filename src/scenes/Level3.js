@@ -26,68 +26,78 @@ class Level3 extends Phaser.Scene {
         player.anims.play('idle');
 
 
-        this.physics.world.gravity.y = 2000;
-        this.physics.world.bounds.setTo(0, 0, map3.widthInPixels, map3.heightInPixels);
-        this.physics.add.collider(player, platformLayer);
-
 //Crosshair and UI
-this.p1 = this.add.sprite(0, 0, 'crosshair');
-this.add.rectangle(this.cameras.x+16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setOrigin(0,0.7); 
-this.healthText = this.add.text(this.cameras.x+16,16, `Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' });
+//this.p1 = this.add.sprite(0, 0, 'crosshair');
+this.add.rectangle(16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setScrollFactor(0);
+this.healthText = this.add.text(16,16, `Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
 
 
 //this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0xFEEEBC).setOrigin(-4,0.7);  
-this.ammoText = this.add.text(this.cameras.x+32,45,`Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' });
+this.ammoText = this.add.text(16,32,`Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
 
 
 // setup camera
  this.cameras.main.setBounds(0, 0, map3.widthInPixels, map3.heightInPixels);
  this.cameras.main.startFollow(player, true, 0.25, 0.25);
 
- const enemySpawn = map3.findObject("Enemy", obj => obj.name === "e3Spawn");
- this.boss1 = new Enemy( this, enemySpawn.x, enemySpawn.y);
+ this.enemyGroup = this.add.group({
+
+    runChildUpdate: true
+});
+
+this.physics.world.gravity.y = 2000;
+this.physics.world.bounds.setTo(0, 0, map3.widthInPixels, map3.heightInPixels);
+this.physics.add.collider(player, platformLayer);
+this.physics.add.collider(this.enemyGroup, platformLayer);
+this.physics.add.collider(player.bulletGroup, platformLayer,(obj1, obj2)=> obj1.destroy());
+this.addEnemy(map3);
 
 
- this.shooting();              
+
+             
 cursors = this.input.keyboard.createCursorKeys();
   this.swap = this.input.keyboard.addKey('S');
 }   
 
-shooting(){
-    //Fire projectile on click
-    this.input.on('pointerdown', (pointer) =>{ 
-
-     //Position Projectile to spawn from player's position
-     this.bullet = new projectile (this, player.x, player.y, 'projectile');
-
-     this.bullet.body.velocity.x =this.p1.x-300; //projectile physics
-     this.bullet.body.velocity.y =this.p1.y-300; 
-    
-     this.ammoCount -= 1
-     this.ammoText.text = `Ammo: ${this.ammoCount}`;
-     
-      this.sfx = this.sound.add('gunshot', {
-          mute: false,
-          volume: 1,
-          rate: 1,
-          loop: false 
-      });
-        this.sfx.play();   
-      })
+addEnemy(map3){
+    for (let i=0;  i< 4; i++) {
+        const enemySpawn = map3.findObject("Enemy", obj => obj.name === "e3Spawn"+(i + 1).toString());
+       let movementSpeed = Phaser.Math.Between(0, 50);
+       enemy1 = new Enemy(this,movementSpeed, enemySpawn.x, enemySpawn.y,);
+       this.enemyGroup.add(enemy1);
+       }
 }
-
-
  update() {    
-    this.input.on('pointermove', (pointer) =>{ 
-        this.p1.x = pointer.x;
-        this.p1.y = pointer.y;
-        })
+   // this.input.on('pointermove', (pointer) =>{ 
+      //  this.p1.x = pointer.x;
+       // this.p1.y = pointer.y;
+       // })
+      
         player.update();
+
+        this.physics.add.overlap(this.enemyGroup, player, this.takeDamage, null, this)
+        this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
+      
+      //Debug swap
         if(Phaser.Input.Keyboard.JustDown(this.swap)) {
             this.scene.start("level1Scene");
         }
+
+
+    }
+    hitEnemy(sprite, bulletGroup) {
+        console.log('hit');
+        sprite.hit();
+        bulletGroup.destroy();
+    
+        if(sprite.isDead())
+        {
+            this.ammoCount += 10
+            this.ammoText.text = `Ammo: ${this.ammoCount}`;
+        }  
     }
 
+    
 
 
 
