@@ -69,7 +69,6 @@ class Level1 extends Phaser.Scene {
         this.cameras.main.startFollow(player, true, 0.25, 0.25);
  
     }
-    
 
     addEnemy(map) {
         for (let i=0;  i< 4; i++) {
@@ -81,7 +80,6 @@ class Level1 extends Phaser.Scene {
     }
  
 
-    
  
     update() {
         // this.input.on('pointermove', (pointer) =>{
