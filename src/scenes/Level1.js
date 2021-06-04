@@ -89,13 +89,6 @@ class Level1 extends Phaser.Scene {
         //     this.p1.x = pointer.x;
         //     this.p1.y = pointer.y;
         //     })
-<<<<<<< HEAD
-
-            this.physics.overlap(player, this.enemyGroup, this.takeDamage, null, this)
-            this.physics.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
-            
-=======
->>>>>>> origin/Group-enemy-Spawn-update
             player.update();
             
             
