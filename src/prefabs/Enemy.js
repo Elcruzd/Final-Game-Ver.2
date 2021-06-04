@@ -30,12 +30,14 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+        
         if(this.newMonster && this.x < game.config.width/2) {
             this.newMonster = false;
        //   this.scene.addEnemy(this.parent, this.velocity);
           // this.scene.addEnemy();
         }
-        // this.body.setAccelerationX(-this.MAX_X_VEL);
+         this.body.setAccelerationX(-this.MAX_X_VEL);
+        this.anims.play('enemyWalk', true);
     }
 
     hit() {
