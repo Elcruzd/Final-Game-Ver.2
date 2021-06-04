@@ -58,6 +58,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
             player.body.setVelocityY(this.JUMP_VELOCITY);
         }
+
+        if(scene.playerHP<=0){
+            this.scene.playerDead = this.scene.sound.add('dead', {
+                mute: false,
+                volume: 1,
+                rate: 1,
+                loop: false 
+                });
+                this.scene.playerDead.play();
+            } 
        
         
     }
@@ -91,6 +101,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.scene.ammoText.text = `Ammo: ${this.scene.ammoCount}`;  
         }
         //Bullet collison with enemies
-        this.scene.physics.collider(this.scene.enemyGroup, this.scene.bulletGroup, this.scene.hitEnemy, null, this)
+        this.scene.physics.add.collider(this.scene.enemyGroup, this.scene.bulletGroup, this.scene.hitEnemy, null, this)
+
+
     }
+
 }
