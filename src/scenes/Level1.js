@@ -38,10 +38,6 @@ class Level1 extends Phaser.Scene {
         
         //this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0x00FF00).setScrollFactor(0);  
         this.ammoText = this.add.text(16, 32, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
-<<<<<<< HEAD
-=======
-        
-
 
         this.enemyGroup = this.add.group({
 
@@ -51,7 +47,6 @@ class Level1 extends Phaser.Scene {
         // const enemySpawn = map.findObject("Object", obj => obj.name === "Enemy Spawn");
         // enemy1 = new Enemy(this, enemySpawn.x, enemySpawn.y, 'enemy1');
         // this.enemyGroup.add(enemy1);
->>>>>>> origin/Level-Transition
 
     
         this.addEnemy(map);
@@ -112,12 +107,6 @@ class Level1 extends Phaser.Scene {
 
     takeDamage(sprite, player){
         console.log('hit');
-<<<<<<< HEAD
-        // player.anims.play('hurt');
-        this.playerHP -=1;
-        this.healthText.text = `Health: ${this.playerHP}`;  
-
-=======
         this.playerHP -=5;
         this.healthText.text = `Health: ${this.playerHP}`;  
 
@@ -134,7 +123,6 @@ class Level1 extends Phaser.Scene {
             ease: 'Linear',
             repeat: 5,
           }); 
->>>>>>> origin/Level-Transition
         this.cameras.main.shake(250, 0.0075);
         if(this.playerHP <= 0)
         {
