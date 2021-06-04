@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="13">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="15">
  <editorsettings>
   <export target="level1.json" format="json"/>
  </editorsettings>
@@ -79,6 +79,11 @@
  </layer>
  <objectgroup id="3" name="Object">
   <object id="2" name="P1 Spawn" x="31.25" y="463.25">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Exit">
+  <object id="14" name="nextLevel" x="581.667" y="366.333">
    <point/>
   </object>
  </objectgroup>
