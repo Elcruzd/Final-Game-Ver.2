@@ -128,6 +128,13 @@ class Level1 extends Phaser.Scene {
         this.cameras.main.shake(250, 0.0075);
         if( this.playerHP <=0)
         {
+            this.playerDead = this.sound.add('dead', {
+                mute: false,
+                volume: 1,
+                rate: 1,
+                loop: false 
+                });
+                this.playerDead.play();
             this.scene.start("menuScene");
         }
     }
