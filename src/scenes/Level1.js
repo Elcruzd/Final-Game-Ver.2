@@ -68,8 +68,11 @@ class Level1 extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(player, true, 0.25, 0.25);
 
-       this.Exit = map.findObject("Exit", obj => obj.name === "nextLevel");
-       this.physics.world.enable(this.Exit);
+       //Move to next level upon Collision
+       const Exit = map.findObject("Exit", obj => obj.name === "nextLevel");
+       this.transition =this.add.rectangle(Exit.x,Exit.y-50,Exit.width,Exit.height, 0xff6699);
+       this.physics.world.enable(this.transition);
+       this.transition.body.allowGravity = false;
  
     }
 
@@ -92,10 +95,12 @@ class Level1 extends Phaser.Scene {
             player.update();
             
             
-            this.physics.add.overlap(this.enemyGroup, player, this.takeDamage, null, this)
+            this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
             this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
         
-            this.physics.add.collider(player, this.Exit, this.exitCall, null, this)
+            
+            //Move to next level upon Collision
+            this.physics.add.collider(player,this.transition, this.exitCall, null, this)
         
            if(Phaser.Input.Keyboard.JustDown(this.swap)) {
           this.scene.start("level3Scene");
@@ -104,9 +109,22 @@ class Level1 extends Phaser.Scene {
 
     takeDamage(sprite, player){
         console.log('hit');
-        this.playerHP -=1;
+        this.playerHP -=5;
         this.healthText.text = `Health: ${this.playerHP}`;  
-        
+
+        //Send Player back to spawn point
+        player.setVelocity(0, 0);
+        player.setX(31.25);
+        player.setY(463.25);
+        player.anims.play('idle', true);
+        player.setAlpha(0);
+        let sendBack = this.tweens.add({
+            targets: player,
+            alpha: 1,
+            duration: 100,
+            ease: 'Linear',
+            repeat: 5,
+          }); 
         this.cameras.main.shake(250, 0.0075);
         if( this.playerHP <=0)
         {
