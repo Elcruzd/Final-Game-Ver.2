@@ -74,7 +74,6 @@ addEnemy(map3){
        // })
       
         player.update();
-
         this.physics.add.overlap(this.enemyGroup, player, this.takeDamage, null, this)
         this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
       
@@ -84,6 +83,32 @@ addEnemy(map3){
         }
 
 
+    }
+
+    takeDamage(sprite, player){
+        console.log('hit');
+        this.playerHP -=5;
+        this.healthText.text = `Health: ${this.playerHP}`;  
+
+        //Send Player back to spawn point
+        player.setVelocity(0, 0);
+        player.setX(130);
+        player.setY(923);
+        player.anims.play('idle', true);
+        player.setAlpha(0);
+        let sendBack = this.tweens.add({
+            targets: player,
+            alpha: 1,
+            duration: 100,
+            ease: 'Linear',
+            repeat: 5,
+          }); 
+        this.cameras.main.shake(250, 0.0075);
+        //Game Over
+        if( this.playerHP <=0)
+        {
+            this.scene.start("menuScene");
+        }
     }
     hitEnemy(sprite, bulletGroup) {
         console.log('hit');

@@ -38,10 +38,22 @@ class Level1 extends Phaser.Scene {
         
         //this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0x00FF00).setScrollFactor(0);  
         this.ammoText = this.add.text(16, 32, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
+<<<<<<< HEAD
+=======
+        
+
 
         this.enemyGroup = this.add.group({
+
             runChildUpdate: true
         });
+
+        // const enemySpawn = map.findObject("Object", obj => obj.name === "Enemy Spawn");
+        // enemy1 = new Enemy(this, enemySpawn.x, enemySpawn.y, 'enemy1');
+        // this.enemyGroup.add(enemy1);
+>>>>>>> origin/Level-Transition
+
+    
         this.addEnemy(map);
         
      
@@ -59,7 +71,11 @@ class Level1 extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(player, true, 0.25, 0.25);
 
-     //  this.Exit = map.findObject("Exit", obj => obj.name === "nextLevel");
+       //Move to next level upon Collision
+       const Exit = map.findObject("Exit", obj => obj.name === "nextLevel");
+       this.transition =this.add.rectangle(Exit.x,Exit.y-50,Exit.width,Exit.height, 0xff6699);
+       this.physics.world.enable(this.transition);
+       this.transition.body.allowGravity = false;
  
     }
 
@@ -82,23 +98,43 @@ class Level1 extends Phaser.Scene {
             player.update();
             
             
-            this.physics.add.overlap(this.enemyGroup, player, this.takeDamage, null, this)
+            this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
             this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
-
-           // this.physics.add.collider(player, this.Exit, this.exitCall(), null, this)
         
-          //  if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-          //  this.scene.start("level3Scene");
             
-     //   }
+            //Move to next level upon Collision
+            this.physics.add.collider(player,this.transition, this.exitCall, null, this)
+        
+           if(Phaser.Input.Keyboard.JustDown(this.swap)) {
+          this.scene.start("level3Scene");
+               }
     }
 
     takeDamage(sprite, player){
         console.log('hit');
+<<<<<<< HEAD
         // player.anims.play('hurt');
         this.playerHP -=1;
         this.healthText.text = `Health: ${this.playerHP}`;  
 
+=======
+        this.playerHP -=5;
+        this.healthText.text = `Health: ${this.playerHP}`;  
+
+        //Send Player back to spawn point
+        player.setVelocity(0, 0);
+        player.setX(31.25);
+        player.setY(463.25);
+        player.anims.play('idle', true);
+        player.setAlpha(0);
+        let sendBack = this.tweens.add({
+            targets: player,
+            alpha: 1,
+            duration: 100,
+            ease: 'Linear',
+            repeat: 5,
+          }); 
+>>>>>>> origin/Level-Transition
         this.cameras.main.shake(250, 0.0075);
         if(this.playerHP <= 0)
         {
@@ -116,10 +152,11 @@ class Level1 extends Phaser.Scene {
             this.ammoText.text = `Ammo: ${this.ammoCount}`;
         }  
     }
-/*
+
   exitCall() {
+      console.log('exit');
     this.scene.start("level3Scene");
-  }*/
+  }
 
 
 }
