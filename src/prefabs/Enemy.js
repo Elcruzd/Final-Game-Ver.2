@@ -32,13 +32,23 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     update() {
         if(this.newMonster && this.x < game.config.width/2) {
             this.newMonster = false;
-            this.scene.addEnemy(this.parent, this.velocity);
+       //   this.scene.addEnemy(this.parent, this.velocity);
+          // this.scene.addEnemy();
         }
         // this.body.setAccelerationX(-this.MAX_X_VEL);
     }
 
     hit() {
+        this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            loop: false 
+            });
+            this.scene.bulletCollide.play();
+            
         console.log('hit2');
+        this.anims.play('enemyHurt', true)
         this.hP = this.hP - 1
         this.isDead();
     }
