@@ -44,8 +44,9 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
             volume: 1,
             rate: 1,
             loop: false 
-            });
-            this.scene.bulletCollide.play();
+        });
+        
+        this.scene.bulletCollide.play();
             
         console.log('hit2');
         this.anims.play('enemyHurt', true)

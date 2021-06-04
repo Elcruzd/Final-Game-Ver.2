@@ -38,16 +38,6 @@ class Level1 extends Phaser.Scene {
         
         //this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0x00FF00).setScrollFactor(0);  
         this.ammoText = this.add.text(16, 32, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
-        
-
-
-        this.enemyGroup = this.add.group({
-            runChildUpdate: true
-        });
-
-        // const enemySpawn = map.findObject("Object", obj => obj.name === "Enemy Spawn");
-        // enemy1 = new Enemy(this, enemySpawn.x, enemySpawn.y, 'enemy1');
-        // this.enemyGroup.add(enemy1);
 
         this.enemyGroup = this.add.group({
             runChildUpdate: true
@@ -75,10 +65,10 @@ class Level1 extends Phaser.Scene {
 
     addEnemy(map) {
         for (let i=0;  i< 4; i++) {
-         const enemySpawn = map.findObject("Enemy1", obj => obj.name === "Enemy Spawn"+(i + 1).toString());
-        let movementSpeed = Phaser.Math.Between(0, 50);
-        enemy1 = new Enemy(this,movementSpeed, enemySpawn.x, enemySpawn.y,);
-        this.enemyGroup.add(enemy1);
+            const enemySpawn = map.findObject("Enemy1", obj => obj.name === "Enemy Spawn"+(i + 1).toString());
+            let movementSpeed = Phaser.Math.Between(0, 50);
+            enemy1 = new Enemy(this,movementSpeed, enemySpawn.x, enemySpawn.y,);
+            this.enemyGroup.add(enemy1);
         }
     }
  
@@ -105,11 +95,12 @@ class Level1 extends Phaser.Scene {
 
     takeDamage(sprite, player){
         console.log('hit');
+        // player.anims.play('hurt');
         this.playerHP -=1;
         this.healthText.text = `Health: ${this.playerHP}`;  
-        
+
         this.cameras.main.shake(250, 0.0075);
-        if( this.playerHP <=0)
+        if(this.playerHP <= 0)
         {
             this.scene.start("menuScene");
         }

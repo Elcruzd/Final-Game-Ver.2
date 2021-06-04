@@ -67,6 +67,18 @@ class Load extends Phaser.Scene {
             frameRate: 10
         });
         this.anims.create({
+            key: 'hurt',
+            frames: this.anims.generateFrameNames('player', {
+                prefix: 'hurt/hurt',
+                start: 1,
+                end: 2,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            // repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
             key: 'attack',
             frames: this.anims.generateFrameNames('player', {
                 prefix: 'attack/attack',
