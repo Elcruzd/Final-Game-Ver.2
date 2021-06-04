@@ -42,6 +42,7 @@ class Level1 extends Phaser.Scene {
 
 
         this.enemyGroup = this.add.group({
+
             runChildUpdate: true
         });
 
@@ -49,9 +50,7 @@ class Level1 extends Phaser.Scene {
         // enemy1 = new Enemy(this, enemySpawn.x, enemySpawn.y, 'enemy1');
         // this.enemyGroup.add(enemy1);
 
-        this.enemyGroup = this.add.group({
-            runChildUpdate: true
-        });
+    
         this.addEnemy(map);
         
      
@@ -69,7 +68,8 @@ class Level1 extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(player, true, 0.25, 0.25);
 
-     //  this.Exit = map.findObject("Exit", obj => obj.name === "nextLevel");
+       this.Exit = map.findObject("Exit", obj => obj.name === "nextLevel");
+       this.physics.world.enable(this.Exit);
  
     }
 
@@ -94,13 +94,12 @@ class Level1 extends Phaser.Scene {
             
             this.physics.add.overlap(this.enemyGroup, player, this.takeDamage, null, this)
             this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
-
-           // this.physics.add.collider(player, this.Exit, this.exitCall(), null, this)
         
-          //  if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-          //  this.scene.start("level3Scene");
-            
-     //   }
+            this.physics.add.collider(player, this.Exit, this.exitCall, null, this)
+        
+           if(Phaser.Input.Keyboard.JustDown(this.swap)) {
+          this.scene.start("level3Scene");
+               }
     }
 
     takeDamage(sprite, player){
@@ -125,10 +124,11 @@ class Level1 extends Phaser.Scene {
             this.ammoText.text = `Ammo: ${this.ammoCount}`;
         }  
     }
-/*
+
   exitCall() {
+      console.log('exit');
     this.scene.start("level3Scene");
-  }*/
+  }
 
 
 }
