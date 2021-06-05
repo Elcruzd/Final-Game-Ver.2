@@ -25,7 +25,7 @@ class Load extends Phaser.Scene {
         this.load.image ('crosshair', 'CHgame.png');
         this.load.image ('projectile', 'bullet.png');
         this.load.image('boss', 'enemy1.png')
-        
+        this.load.image('menuBackground', 'finalgametitle.png');
         // load tilemap.json Data
         this.load.tilemapTiledJSON('map1', 'level1.json');
         this.load.tilemapTiledJSON ('map3','Level 3.json');
@@ -35,6 +35,7 @@ class Load extends Phaser.Scene {
         this.load.audio('bgm', 'bgm.wav');
         this.load.audio('gunshot', 'gunshot.wav');
         this.load.audio('monsterHit', 'monsterHit.wav');
+        this.load.audio('dead', 'dead.wav');
         // load player atlas asset
         this.load.atlas('player', 'player.png', 'player.json');
         this.load.atlas('enemy1', 'enemy1.png', 'enemy1.json');
@@ -148,7 +149,7 @@ class Load extends Phaser.Scene {
                 zeroPad: 4,
             }),
             repeat: -1,
-            frameRate: 10
+            frameRate: 2
         });
         this.anims.create({
             key: 'enemyDeath',
