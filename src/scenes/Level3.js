@@ -10,7 +10,7 @@ class Level3 extends Phaser.Scene {
     }
     create() {
         const map3 = this.add.tilemap('map3');
-        const bgset = map3.addTilesetImage('background1', 'background1');
+        const bgset = map3.addTilesetImage('background4', 'background4');
         const tileset = map3.addTilesetImage("prop pack", 'platforms');
         const bgLayer = map3.createLayer('Background', bgset, 0, 0);
         const platformLayer = map3.createLayer('Platforms', tileset, 0, 0);
@@ -20,6 +20,9 @@ class Level3 extends Phaser.Scene {
         this.ammoCount = 50;
 
         platformLayer.setCollisionByExclusion(-1, true);
+        platformLayer.setCollisionByProperty({ 
+            Collide: true 
+        });    
 
         const p1Spawn = map3.findObject("Player spawn", obj => obj.name === "p1 Spawn");
         player = new Player(this, p1Spawn.x, p1Spawn.y, 'player');
@@ -53,25 +56,28 @@ this.physics.add.collider(player.bulletGroup, platformLayer,(obj1, obj2)=> obj1.
 this.addEnemy(map3);
 
 
-
              
 cursors = this.input.keyboard.createCursorKeys();
   this.swap = this.input.keyboard.addKey('S');
 }   
 
 addEnemy(map3){
-    for (let i=0;  i< 4; i++) {
-        const enemySpawn = map3.findObject("Enemy", obj => obj.name === "e3Spawn"+(i + 1).toString());
-        let movementSpeed = Phaser.Math.Between(0, 50);
-        enemy1 = new Enemy(this,movementSpeed, enemySpawn.x, enemySpawn.y,);
-        this.enemyGroup.add(enemy1);
-    }
+    for (let i=0;  i< 10; i++) {
+      const enemySpawn = map3.findObject("Enemy", obj => obj.name === "Enemy Spawn"+(i + 1).toString());
+      let movementSpeed = Phaser.Math.Between(0, 50);
+      let enemy1 = new Enemy(this, movementSpeed, enemySpawn.x, enemySpawn.y,);
+       this.enemyGroup.add(enemy1);
+       }
 }
  update() {    
    // this.input.on('pointermove', (pointer) =>{ 
       //  this.p1.x = pointer.x;
        // this.p1.y = pointer.y;
        // })
+
+       if(this.ammoCount<=0){
+        this.scene.start("menuScene");
+    }
       
         player.update();
         this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
@@ -87,7 +93,7 @@ addEnemy(map3){
 
     takeDamage(sprite, player){
         console.log('hit');
-        this.playerHP -=5;
+        this.playerHP -=20;
         this.healthText.text = `Health: ${this.playerHP}`;  
         //Send Player back to spawn point
         player.setVelocity(0, 0);
