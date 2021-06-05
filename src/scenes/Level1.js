@@ -35,7 +35,6 @@ class Level1 extends Phaser.Scene {
         // this.p1 = this.add.sprite(0, 0, 'crosshair');
       //  this.add.rectangle(16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setScrollFactor(0); 
         this.healthText = this.add.text(16, 16 ,`Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
-        
         //this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0x00FF00).setScrollFactor(0);  
         this.ammoText = this.add.text(16, 32, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
 
@@ -50,7 +49,7 @@ class Level1 extends Phaser.Scene {
 
     
         this.addEnemy(map);
-        
+
      
         this.physics.world.gravity.y = 2000;
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
@@ -91,10 +90,12 @@ class Level1 extends Phaser.Scene {
         //     this.p1.y = pointer.y;
         //     })
             player.update();
-            
+            if(this.ammoCount<=0){
+                this.scene.start("menuScene");
+              }
             
             this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
-            this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
+            this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
         
             
             //Move to next level upon Collision
@@ -110,7 +111,7 @@ class Level1 extends Phaser.Scene {
         this.playerHP -=5;
         this.healthText.text = `Health: ${this.playerHP}`;  
 
-        //Send Player back to spawn point
+        //Send Player back to spawn point on collison with enemy
         player.setVelocity(0, 0);
         player.setX(31.25);
         player.setY(463.25);
