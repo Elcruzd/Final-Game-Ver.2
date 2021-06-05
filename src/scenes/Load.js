@@ -22,6 +22,7 @@ class Load extends Phaser.Scene {
         this.load.image('background4', 'background4.png')
         this.load.image('platforms', 'prop pack.png')
         this.load.image('items', 'colored_packed.png')
+        this.load.image('menuBackground', 'finalgametitle.png');
         // this.load.image('platforms2', 'tileset1.png')
        
        //Game assets
@@ -39,6 +40,7 @@ class Load extends Phaser.Scene {
         this.load.audio('bgm', 'bgm.wav');
         this.load.audio('gunshot', 'gunshot.wav');
         this.load.audio('monsterHit', 'monsterHit.wav');
+        this.load.audio('dead', 'dead.wav');
         // load player atlas asset
         this.load.atlas('player', 'player.png', 'player.json');
         this.load.atlas('enemy1', 'enemy1.png', 'enemy1.json');

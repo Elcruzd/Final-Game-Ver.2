@@ -14,7 +14,7 @@ class Menu extends Phaser.Scene {
 
     create() {
         // place menu background
-        // this.add.image(0, 0, 'menuBackground').setOrigin(0, 0);
+         this.add.image(0, 0, 'menuBackground').setOrigin(0, 0);
         // place logo
         // this.add.image(game.config.width/2, game.config.height/4, 'logo').setOrigin(0.5);
         
