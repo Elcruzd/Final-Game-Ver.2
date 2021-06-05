@@ -91,7 +91,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.scene.ammoText.text = `Ammo: ${this.scene.ammoCount}`;  
         }
         //Bullet collison with enemies
-        this.scene.physics.collider(this.scene.enemyGroup, this.scene.bulletGroup, this.scene.hitEnemy, null, this)
+        this.scene.physics.add.collider(this.scene.enemyGroup, this.scene.bulletGroup, this.scene.hitEnemy, null, this)
     }
 
     
