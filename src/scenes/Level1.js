@@ -103,6 +103,7 @@ class Level1 extends Phaser.Scene {
                 this.scene.start("menuScene");
             }
             
+            
             this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
             this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
         
@@ -117,7 +118,7 @@ class Level1 extends Phaser.Scene {
 
     takeDamage(sprite, player) {
         console.log('hit');
-        this.playerHP -=5;
+        this.playerHP -=10;
         this.healthText.text = `Health: ${this.playerHP}`;  
 
         //Send Player back to spawn point on collison with enemy
