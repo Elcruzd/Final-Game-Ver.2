@@ -32,10 +32,11 @@ class Menu extends Phaser.Scene {
         }
 
         // add play button
+        this.playButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 32, game.config.width/2, borderUISize * 2, 0xFEEEBC)
         this.playButton = this.add.text(game.config.width/2, game.config.height/2 + 32, 'CLICK HERE TO START', menuConfig).setOrigin(0.5);
         // set interactive that can go to the play scene
-        this.playButton.setInteractive();
-        this.playButton.on('pointerdown', () => {
+        this.playButtonOutline.setInteractive();
+        this.playButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
                 volume: 0.2,
