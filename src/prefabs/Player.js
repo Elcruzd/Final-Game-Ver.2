@@ -97,13 +97,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     
     isDead(){
         if(this.scene.playerHP<=0){
-          this.scene.playerDead = this.scene.sound.add('dead', {
+            this.scene.playerDead = this.scene.sound.add('dead', {
                 mute: false,
                 volume: 0.5,
                 rate: 1,
                 loop: false 
-                });
-                this.scene.playerDead.play();
-            } 
+            });
+            this.scene.playerDead.play();
+        } 
     }
 }

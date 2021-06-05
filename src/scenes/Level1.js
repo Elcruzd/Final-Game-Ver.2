@@ -92,7 +92,7 @@ class Level1 extends Phaser.Scene {
             player.update();
             if(this.ammoCount<=0){
                 this.scene.start("menuScene");
-              }
+            }
             
             this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
             this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
@@ -101,12 +101,12 @@ class Level1 extends Phaser.Scene {
             //Move to next level upon Collision
             this.physics.add.collider(player,this.transition, this.exitCall, null, this)
         
-           if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-          this.scene.start("level3Scene");
-               }
+            if(Phaser.Input.Keyboard.JustDown(this.swap)) {
+                this.scene.start("level3Scene");
+            }
     }
 
-    takeDamage(sprite, player){
+    takeDamage(sprite, player) {
         console.log('hit');
         this.playerHP -=5;
         this.healthText.text = `Health: ${this.playerHP}`;  
@@ -123,7 +123,7 @@ class Level1 extends Phaser.Scene {
             duration: 100,
             ease: 'Linear',
             repeat: 5,
-          }); 
+        }); 
         this.cameras.main.shake(250, 0.0075);
         if(this.playerHP <= 0)
         {
@@ -142,10 +142,10 @@ class Level1 extends Phaser.Scene {
         }  
     }
 
-  exitCall() {
-      console.log('exit');
-    this.scene.start("level3Scene");
-  }
+    exitCall() {
+        console.log('exit');
+        this.scene.start("level3Scene");
+    }
 
 
 }

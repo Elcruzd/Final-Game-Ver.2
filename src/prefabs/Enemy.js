@@ -55,11 +55,12 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     isDead() {
-         //Destroy sprite in multiple hits
-         if(this.hP <= 0)
-         {
-             this.destroy();
-             return true;
-         }
+
+        // Destroy sprite in multiple hits
+        if(this.hP <= 0)
+        {
+            this.destroy();
+            return true;
+        }
     }
 }
