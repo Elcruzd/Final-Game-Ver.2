@@ -28,6 +28,7 @@ class Load extends Phaser.Scene {
        //Game assets
         this.load.image ('crosshair', 'CHgame.png');
         this.load.image ('projectile', 'bullet.png');
+        this.load.image ('fireball', 'fireball.png');
         this.load.image('boss', 'enemy1.png')
         
         // load tilemap.json Data
