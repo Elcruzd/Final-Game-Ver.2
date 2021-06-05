@@ -29,7 +29,7 @@ let config = {
         }
     },
     // zoom: 2,
-    scene: [ Load, Menu, Credits, Level1, Level3, End ]
+    scene: [ Load, Menu, Credits, Level1, Level2, Level3, End ]
 }
 // localStorage.clear();
 

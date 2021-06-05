@@ -41,7 +41,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     hit() {
         this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
             mute: false,
-            volume: 1,
+            volume: 0.2,
             rate: 1,
             loop: false 
         });
