@@ -17,7 +17,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         // this.anims.play('enemyWalk');
         // this.MAX_X_VEL = 200;
         // this.setSize(128, 32);
-        this.hP = 5; //set hitpoints
+        this.hP = 10; //set hitpoints
         this.setVelocityX(velocity);
         this.setCollideWorldBounds(true);
         // this.body.allowGravity = false;  //prevent sprite from falling
