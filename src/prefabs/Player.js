@@ -66,7 +66,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(this.attack) {
             player.anims.play('attack');
 
-            let bullet = this.scene.physics.add.sprite(player.x, player.y, 'projectile').setImmovable(true);
+            let bullet = this.scene.physics.add.sprite(player.x, player.y, 'fireball').setImmovable(true);
             bullet.body.setAllowGravity(false);
             this.scene.physics.velocityFromAngle(Phaser.Math.RadToDeg(Phaser.Math.Angle.BetweenPoints(player, pointer)), 500, bullet.body.velocity);
             // bullet.body.setAngularVelocity(1000);
