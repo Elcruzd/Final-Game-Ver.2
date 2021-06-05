@@ -67,10 +67,10 @@ class Level2 extends Phaser.Scene {
         this.cameras.main.startFollow(player, true, 0.25, 0.25);
 
         // Move to next level upon Collision
-        // const Exit = map.findObject("Exit2", obj => obj.name === "nextLevel");
-        // this.transition = this.add.rectangle(Exit.x, Exit.y-50, Exit.width, Exit.height, 0xff6699);
-        // this.physics.world.enable(this.transition);
-        // this.transition.body.allowGravity = false;
+         const Exit = map.findObject("Exit2", obj => obj.name === "nextLevel2");
+         this.transition = this.add.rectangle(Exit.x, Exit.y-50, Exit.width, Exit.height, 0xff6699);
+         this.physics.world.enable(this.transition);
+         this.transition.body.allowGravity = false;
  
     }
 
@@ -92,6 +92,10 @@ class Level2 extends Phaser.Scene {
         //     })
             player.update();
             
+            //ammoCount gameOver
+            if(this.ammoCount <=0){
+                this.scene.start("menuScene");
+              }
             
             this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
             this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
