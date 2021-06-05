@@ -74,8 +74,8 @@ addEnemy(map3){
        // })
       
         player.update();
-        this.physics.add.overlap(this.enemyGroup, player, this.takeDamage, null, this)
-        this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
+        this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
+        this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
       
       //Debug swap
         if(Phaser.Input.Keyboard.JustDown(this.swap)) {
@@ -89,7 +89,6 @@ addEnemy(map3){
         console.log('hit');
         this.playerHP -=5;
         this.healthText.text = `Health: ${this.playerHP}`;  
-
         //Send Player back to spawn point
         player.setVelocity(0, 0);
         player.setX(130);
