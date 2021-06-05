@@ -27,6 +27,15 @@ class Level1 extends Phaser.Scene {
         // });
         platformLayer.setCollisionByExclusion(-1, true);
 
+         //Play bgm
+         this.bgm = this.sound.add('bgm', {
+            mute: false,
+            volume: 1.5,
+            rate: 1.5,
+            loop: true 
+        });
+        this.bgm.play();
+
         const p1Spawn = map.findObject("Object", obj => obj.name === "P1 Spawn");
         player = new Player(this, p1Spawn.x, p1Spawn.y, 'player');
         player.anims.play('idle');
@@ -144,7 +153,7 @@ class Level1 extends Phaser.Scene {
 
     exitCall() {
         console.log('exit');
-        this.scene.start("level3Scene");
+        this.scene.start("level2Scene");
     }
 
 
