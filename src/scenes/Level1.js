@@ -97,23 +97,24 @@ class Level1 extends Phaser.Scene {
         // this.input.on('pointermove', (pointer) =>{
         //     this.p1.x = pointer.x;
         //     this.p1.y = pointer.y;
-        //     })
-            player.update();
-            if(this.ammoCount<=0){
-                this.scene.start("menuScene");
-            }
+        // })
+
+        player.update();
+        if(this.ammoCount<=0){
+            this.scene.start("menuScene");
+        }
             
             
-            this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
-            this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
+        this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
+        this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
         
             
-            //Move to next level upon Collision
-            this.physics.add.collider(player,this.transition, this.exitCall, null, this)
+        // Move to next level upon Collision
+        this.physics.add.collider(player,this.transition, this.exitCall, null, this)
         
-            if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-                this.scene.start("level3Scene");
-            }
+        if(Phaser.Input.Keyboard.JustDown(this.swap)) {
+            this.scene.start("level3Scene");
+        }
     }
 
     takeDamage(sprite, player) {
@@ -121,7 +122,7 @@ class Level1 extends Phaser.Scene {
         this.playerHP -=10;
         this.healthText.text = `Health: ${this.playerHP}`;  
 
-        //Send Player back to spawn point on collison with enemy
+        // Send Player back to spawn point on collison with enemy
         player.setVelocity(0, 0);
         player.setX(31.25);
         player.setY(463.25);

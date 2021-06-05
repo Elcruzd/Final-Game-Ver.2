@@ -62,10 +62,10 @@ cursors = this.input.keyboard.createCursorKeys();
 addEnemy(map3){
     for (let i=0;  i< 4; i++) {
         const enemySpawn = map3.findObject("Enemy", obj => obj.name === "e3Spawn"+(i + 1).toString());
-       let movementSpeed = Phaser.Math.Between(0, 50);
-       enemy1 = new Enemy(this,movementSpeed, enemySpawn.x, enemySpawn.y,);
-       this.enemyGroup.add(enemy1);
-       }
+        let movementSpeed = Phaser.Math.Between(0, 50);
+        enemy1 = new Enemy(this,movementSpeed, enemySpawn.x, enemySpawn.y,);
+        this.enemyGroup.add(enemy1);
+    }
 }
  update() {    
    // this.input.on('pointermove', (pointer) =>{ 
