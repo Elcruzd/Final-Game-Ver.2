@@ -179,11 +179,7 @@ class Load extends Phaser.Scene {
                 suffix: '.png',
                 zeroPad: 4,
             }),
-<<<<<<< HEAD
             // repeat: -1,
-=======
-            repeat: 1,
->>>>>>> origin/Fine-Tuning
             frameRate: 10
         });
         this.anims.create({
