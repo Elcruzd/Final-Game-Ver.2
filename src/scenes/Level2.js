@@ -28,7 +28,7 @@ class Level2 extends Phaser.Scene {
         // });
         platformLayer.setCollisionByExclusion(-1, true);
 
-         //Play bgm
+        /* //Play bgm
          this.bgm = this.sound.add('bgm', {
             mute: false,
             volume: 0.3,
@@ -36,7 +36,7 @@ class Level2 extends Phaser.Scene {
             loop: true 
         });
         this.bgm.play();
-
+       */
         const p1Spawn = map.findObject("Object", obj => obj.name === "P1 Spawn");
         player = new Player(this, p1Spawn.x, p1Spawn.y, 'player');
         // player.anims.play('idle');
