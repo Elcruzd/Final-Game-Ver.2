@@ -94,6 +94,7 @@ class Level2 extends Phaser.Scene {
             
             //ammoCount gameOver
             if(this.ammoCount <=0){
+                this.sound.stopAll();
                 this.scene.start("menuScene");
               }
             
@@ -111,7 +112,7 @@ class Level2 extends Phaser.Scene {
 
     takeDamage(sprite, player){
         console.log('hit');
-        this.playerHP -=5;
+        this.playerHP -=15;
         this.healthText.text = `Health: ${this.playerHP}`;  
 
         //Send Player back to spawn point

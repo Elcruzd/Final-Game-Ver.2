@@ -21,7 +21,7 @@ class Level3 extends Phaser.Scene {
 
         platformLayer.setCollisionByExclusion(-1, true);
         platformLayer.setCollisionByProperty({ 
-            Collide: true 
+            Collider: true 
         });    
 
         const p1Spawn = map3.findObject("Player spawn", obj => obj.name === "p1 Spawn");
@@ -44,10 +44,10 @@ this.ammoText = this.add.text(16,32,`Ammo: ${this.ammoCount}`, { fontSize: '16px
  this.cameras.main.startFollow(player, true, 0.25, 0.25);
 
  this.enemyGroup = this.add.group({
-
     runChildUpdate: true
 });
 
+this.addEnemy(map3);
 this.physics.world.gravity.y = 2000;
 this.physics.world.bounds.setTo(0, 0, map3.widthInPixels, map3.heightInPixels);
 this.physics.add.collider(player, platformLayer);
@@ -59,16 +59,24 @@ this.physics.add.collider(player.bulletGroup, platformLayer,(obj1, obj2)=> obj1.
              
 cursors = this.input.keyboard.createCursorKeys();
   this.swap = this.input.keyboard.addKey('S');
+
+
+    //Move to End Scene upon collision
+  const Exit = map3.findObject("Exit3", obj => obj.name === "End");
+  this.transition = this.add.rectangle(Exit.x, Exit.y-50, Exit.width, Exit.height, 0xff6699);
+  this.physics.world.enable(this.transition);
+  this.transition.body.allowGravity = false;
+
 }   
 
-// addEnemy(map3){
-//     for (let i=0;  i< 10; i++) {
-//         const enemySpawn = map3.findObject("Enemy", obj => obj.name === "Enemy Spawn"+(i + 1).toString());
-//         let movementSpeed = Phaser.Math.Between(0, 50);
-//         let enemy1 = new Enemy(this, movementSpeed, enemySpawn.x, enemySpawn.y,);
-//         this.enemyGroup.add(enemy1);
-//     }
-// }
+addEnemy(map3){
+    for (let i=0;  i< 10; i++) {
+      const enemySpawn = map3.findObject("Enemy", obj => obj.name === "Enemy Spawn"+(i + 1).toString()); //need to fix
+      let movementSpeed = Phaser.Math.Between(0, 50);
+       enemy1 = new Enemy(this, movementSpeed, enemySpawn.x, enemySpawn.y);
+       this.enemyGroup.add(enemy1);
+       }
+}
  update() {    
    // this.input.on('pointermove', (pointer) =>{ 
       //  this.p1.x = pointer.x;
@@ -82,6 +90,9 @@ cursors = this.input.keyboard.createCursorKeys();
         player.update();
         this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
         this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
+
+        //Move to next level upon Collision
+            this.physics.add.collider(player,this.transition, this.exitCall, null, this)
       
       //Debug swap
         if(Phaser.Input.Keyboard.JustDown(this.swap)) {
@@ -97,8 +108,8 @@ cursors = this.input.keyboard.createCursorKeys();
         this.healthText.text = `Health: ${this.playerHP}`;  
         //Send Player back to spawn point
         player.setVelocity(0, 0);
-        player.setX(130);
-        player.setY(923);
+        player.setX(27.5,);
+        player.setY(383.5);
         player.anims.play('idle', true);
         player.setAlpha(0);
         let sendBack = this.tweens.add({
@@ -130,5 +141,9 @@ cursors = this.input.keyboard.createCursorKeys();
     
 
 
+    exitCall() {
+        console.log('exit');
+      this.scene.start("endScene");
+    }
 
 }

@@ -126,8 +126,7 @@ class Level1 extends Phaser.Scene {
         }
         if(this.playerHP <= 0) {
             this.scene.start("menuScene");
-        }
-            
+        }            
             
         // this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
         // this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
