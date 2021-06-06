@@ -20,9 +20,9 @@ class Menu extends Phaser.Scene {
         
         // menu text configuration
         let menuConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'Tahoma',
             fontSize: '20px',
-            color: '#FFFFFF',
+            color: '#000000.',
             align: 'right',
             padding: {
                 top: 5,
@@ -33,7 +33,7 @@ class Menu extends Phaser.Scene {
 
         // add play button
         this.playButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 32, game.config.width/2, borderUISize * 2, 0xFEEEBC)
-        this.playButton = this.add.text(game.config.width/2, game.config.height/2 + 32, 'CLICK HERE TO START', menuConfig).setOrigin(0.5);
+        this.playButton = this.add.text(game.config.width/2, game.config.height/2 + 32, 'START GAME', menuConfig).setOrigin(0.5);
         // set interactive that can go to the play scene
         this.playButtonOutline.setInteractive();
         this.playButtonOutline.on('pointerdown', () => {

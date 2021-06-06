@@ -31,7 +31,7 @@ class Level3 extends Phaser.Scene {
 
 //Crosshair and UI
 //this.p1 = this.add.sprite(0, 0, 'crosshair');
-this.add.rectangle(16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setScrollFactor(0);
+//this.add.rectangle(16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setScrollFactor(0);
 this.healthText = this.add.text(16,16, `Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
 
 
@@ -83,9 +83,10 @@ addEnemy(map3){
        // this.p1.y = pointer.y;
        // })
 
-       if(this.ammoCount<=0){
+       if(this.ammoCount<=0||this.playerHP<=0){
+        this.sound.stopAll();
         this.scene.start("menuScene");
-    }
+        }
       
         player.update();
         this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
@@ -142,7 +143,7 @@ addEnemy(map3){
 
 
     exitCall() {
-        console.log('exit');
+      console.log('exit');
       this.scene.start("endScene");
     }
 
