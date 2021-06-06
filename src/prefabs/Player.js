@@ -32,17 +32,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.attack = true;
         this.bulletGroup = scene.add.group();
-        scene.input.on('pointerdown', (pointer) => {
-            this.shoot(pointer);
-        })
+        // mouse = scene.input.on('pointerdown', (pointer) => {
+        //     this.shoot(pointer);
+        // })
+        // mouse = this.input.mousePointer;
     }
 
     update() {
-        if(cursors.left.isDown) {
+        if(cursors.left.isDown || keyA.isDown) {
             player.body.setAccelerationX(-this.ACCELERATION);
             player.anims.play('run', true);
             player.setFlip(true, false);
-        } else if(cursors.right.isDown) {
+        } else if(cursors.right.isDown || keyD.isDown) {
             player.body.setAccelerationX(this.ACCELERATION);
             player.anims.play('run', true);
             player.resetFlip();
@@ -55,17 +56,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(!player.body.blocked.down) {
             player.anims.play('jump');
         }
-        if(player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
-            player.body.setVelocityY(this.JUMP_VELOCITY);
+        if(player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up) || Phaser.Input.Keyboard.JustDown(keyW)) {
+            // player.body.setVelocityY(this.JUMP_VELOCITY);
+            if(player.body.onFloor()) {
+                this.canDoubleJump = false;
+                this.setVelocityY(this.JUMP_VELOCITY);
+            }
         }
-       
         
     }
 
     shoot(pointer) {
         if(this.attack) {
-            player.anims.play('attack');
-
             let bullet = this.scene.physics.add.sprite(player.x, player.y, 'fireball').setImmovable(true);
             bullet.body.setAllowGravity(false);
             this.scene.physics.velocityFromAngle(Phaser.Math.RadToDeg(Phaser.Math.Angle.BetweenPoints(player, pointer)), 500, bullet.body.velocity);
@@ -77,6 +79,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 loop: false 
             });
             this.scene.sfx.play();
+            // player.anims.play('attack', true);
             this.bulletGroup.add(bullet);
 
             this.scene.time.delayedCall(2000, () => {
@@ -90,10 +93,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.scene.ammoCount -= 1
             this.scene.ammoText.text = `Ammo: ${this.scene.ammoCount}`;  
         }
-        //Bullet collison with enemies
-        this.scene.physics.add.collider(this.scene.enemyGroup, this.scene.bulletGroup, this.scene.hitEnemy, null, this)
+        // //Bullet collison with enemies
+        // this.scene.physics.add.collider(this.scene.enemyGroup, this.scene.bulletGroup, this.scene.hitEnemy, null, this)
     }
-
     
     isDead(){
         if(this.scene.playerHP<=0){

@@ -8,34 +8,43 @@
 */
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, velocity, positionX, positionY) {
+    constructor(scene, x, y, texture, frame) {
         // call Phaser Physics Sprite constructor
-        super (scene, positionX, positionY, 'enemy1');
+        super (scene, x, y, texture, frame);
         scene.add.existing(this);           // add object to the existing scene
         scene.physics.add.existing(this);
         this.setOrigin(0, 0);
-        // this.anims.play('enemyWalk');
-        // this.MAX_X_VEL = 200;
-        // this.setSize(128, 32);
-        this.hP = 10; //set hitpoints
-        this.setVelocityX(velocity);
-        this.setCollideWorldBounds(true);
+        this.anims.play('enemyWalk', true)
         // this.body.allowGravity = false;  //prevent sprite from falling
         this.body.allowGravity = true;
-        this.body.checkCollision.down = true;
-        this.body.checkCollision.up = true;
-        this.body.checkCollision.left = true;
-        this.body.checkCollision.right = true;
-        this.newMonster = true;
+        this.hP = 5; //set hitpoints
+        this.movementSpeed = 100;
+        this.setVelocityX(-this.movementSpeed);
+        this.moveLeft = true;
+        this.setCollideWorldBounds(true);
+        
     }
 
     update() {
-        if(this.newMonster && this.x < game.config.width/2) {
-            this.newMonster = false;
-       //   this.scene.addEnemy(this.parent, this.velocity);
-          // this.scene.addEnemy();
+        // change direction of enemies
+        if(this.x < 0) {
+            this.setVelocityX(this.movementSpeed);
+        }else if(this.x > game.config.width - this.width) {
+            this.setVelocityX(-this.movementSpeed);
         }
-        // this.body.setAccelerationX(-this.MAX_X_VEL);
+    }
+
+    changeDirection() {
+        // check if monster moving the right direction and flip their body
+        if(this.moveLeft == true) {
+            this.moveLeft = false;
+            this.setVelocityX(-this.movementSpeed);
+            this.resetFlip();
+        }else if(this.moveLeft == false) {
+            this.moveLeft = true;
+            this.setVelocityX(this.movementSpeed);
+            this.flipX = true;
+        }
     }
 
     hit() {
@@ -45,9 +54,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
             rate: 1,
             loop: false 
         });
-        
         this.scene.bulletCollide.play();
-            
         console.log('hit2');
         this.anims.play('enemyHurt', true)
         this.hP = this.hP - 1
@@ -55,12 +62,9 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     isDead() {
-
         // Destroy sprite in multiple hits
-        if(this.hP <= 0)
-        {
+        if(this.hP <= 0) {
             this.destroy();
-            return true;
         }
     }
 }

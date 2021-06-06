@@ -53,7 +53,7 @@ this.physics.world.bounds.setTo(0, 0, map3.widthInPixels, map3.heightInPixels);
 this.physics.add.collider(player, platformLayer);
 this.physics.add.collider(this.enemyGroup, platformLayer);
 this.physics.add.collider(player.bulletGroup, platformLayer,(obj1, obj2)=> obj1.destroy());
-this.addEnemy(map3);
+// this.addEnemy(map3);
 
 
              
@@ -61,14 +61,14 @@ cursors = this.input.keyboard.createCursorKeys();
   this.swap = this.input.keyboard.addKey('S');
 }   
 
-addEnemy(map3){
-    for (let i=0;  i< 10; i++) {
-      const enemySpawn = map3.findObject("Enemy", obj => obj.name === "Enemy Spawn"+(i + 1).toString());
-      let movementSpeed = Phaser.Math.Between(0, 50);
-      let enemy1 = new Enemy(this, movementSpeed, enemySpawn.x, enemySpawn.y,);
-       this.enemyGroup.add(enemy1);
-       }
-}
+// addEnemy(map3){
+//     for (let i=0;  i< 10; i++) {
+//         const enemySpawn = map3.findObject("Enemy", obj => obj.name === "Enemy Spawn"+(i + 1).toString());
+//         let movementSpeed = Phaser.Math.Between(0, 50);
+//         let enemy1 = new Enemy(this, movementSpeed, enemySpawn.x, enemySpawn.y,);
+//         this.enemyGroup.add(enemy1);
+//     }
+// }
  update() {    
    // this.input.on('pointermove', (pointer) =>{ 
       //  this.p1.x = pointer.x;

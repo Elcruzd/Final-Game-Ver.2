@@ -40,7 +40,9 @@ let game = new Phaser.Game(config);
 let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
 let cursors;
+let keyW, keyA, keyF, keyD, mouse;
 let player;
 let enemy1;
-let ammoCount;
+let enemy2;
+let boss;
 // initialize score and high score
