@@ -30,7 +30,7 @@ class Level1 extends Phaser.Scene {
          //Play bgm
          this.bgm = this.sound.add('bgm', {
             mute: false,
-            volume: 1.5,
+            volume: 0.5,
             rate: 1.5,
             loop: true 
         });
@@ -59,7 +59,6 @@ class Level1 extends Phaser.Scene {
     
         this.addEnemy(map);
 
-     
         this.physics.world.gravity.y = 2000;
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
         this.physics.add.collider(player, platformLayer);
@@ -100,6 +99,7 @@ class Level1 extends Phaser.Scene {
         //     })
             player.update();
             if(this.ammoCount<=0){
+                this.sound.stopAll();
                 this.scene.start("menuScene");
             }
             
