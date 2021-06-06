@@ -39,7 +39,7 @@ class Level1 extends Phaser.Scene {
 
         const p1Spawn = map.findObject("Object", obj => obj.name === "P1 Spawn");
         player = new Player(this, p1Spawn.x, p1Spawn.y, 'player');
-        player.anims.play('idle');
+        // player.anims.play('idle');
 
         // Crosshair and UI
         // this.p1 = this.add.sprite(0, 0, 'crosshair');
@@ -52,21 +52,28 @@ class Level1 extends Phaser.Scene {
 
             runChildUpdate: true
         });
+        this.enemyWallsGroup = this.add.group({
+            runChildUpdate: true
+        });
 
         this.addEnemy(map);
-        // this.addWallBlocks();
+        this.addInvisibleWall();
      
         this.physics.world.gravity.y = 2000;
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
         this.physics.add.collider(player, platformLayer);
+        // this.physics.add.collider(this.enemyGroup, platformLayer);
         this.physics.add.collider(this.enemyGroup, platformLayer, (obj1, obj2) => {
             obj1.changeDirection();
         });
+        this.physics.add.collider(this.enemyGroup, this.enemyWallsGroup, (obj1, obj2) => {
+            obj1.changeDirection();
+        });
         // this.physics.add.overlap(player, this.enemyGroup, this.takeDamage, null, this);
-        this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
-        this.physics.add.overlap(player, this.enemyGroup, (obj, obj2) => {
+        this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
+        this.physics.add.overlap(player, this.enemyGroup, (obj1, obj2) => {
             if(playerHurt == false) {
-                this.playerHP -=1;
+                this.playerHP -=100;
                 this.healthText.text = `Health: ${this.playerHP}`;
                 playerHurt = true;
                 obj2.changeDirection();
@@ -86,7 +93,7 @@ class Level1 extends Phaser.Scene {
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
-        mouse = this.input.on('pointerdown', (pointer) => {
+        this.input.on('pointerdown', (pointer) => {
             if(pointer.leftButtonDown()) {
                 player.shoot(pointer);
             }
@@ -112,21 +119,39 @@ class Level1 extends Phaser.Scene {
         }
     }
 
-    // addInvisibleWall() {
-    //     this.enemyWallsGroup = this.add.group();
-    //     this.enemyWall = this.addWall();
-    //     this.enemtWallsGroup.add(this.enemyWall);
-    // }
- 
+    addInvisibleWall() {
+        this.enemyWall = this.addWall(161, 240);
+        this.enemyWallsGroup.add(this.enemyWall);
+        this.enemyWall2 = this.addWall(214, 212);
+        this.enemyWallsGroup.add(this.enemyWall2);
+        this.enemyWall3 = this.addWall(454, 212);
+        this.enemyWallsGroup.add(this.enemyWall3);
+        this.enemyWall4 = this.addWall(294, 357);
+        this.enemyWallsGroup.add(this.enemyWall4);
+        this.enemyWall5 = this.addWall(1046, 260);
+        this.enemyWallsGroup.add(this.enemyWall5);
+        this.enemyWall6 = this.addWall(1384, 358);
+        this.enemyWallsGroup.add(this.enemyWall6);
+    }
+    // custom wall property
+    addWall(x, y) {
+        let wall = this.physics.add.sprite(x, y, 'crosshair').setOrigin(0.5).setScale(0.1, 0.3);
+        // wall.setOffset(18, 16);
+        wall.setVisible(false);
+        wall.setImmovable(true);
+        wall.body.allowGravity = false;
+        return wall;
+    }
+
     update() {
         player.update();
         enemy1.update();
         if(this.ammoCount<=0) {
             this.scene.start("menuScene");
         }
-        if(this.playerHP <= 0) {
-            this.scene.start("menuScene");
-        }            
+        // if(this.playerHP <= 0) {
+        //     this.scene.start("menuScene");
+        // }            
             
         // this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
         // this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);

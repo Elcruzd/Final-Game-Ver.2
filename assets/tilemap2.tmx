@@ -86,34 +86,34 @@
   </object>
  </objectgroup>
  <objectgroup id="6" name="Enemy2">
-  <object id="12" name="Enemy Spawn2" x="344" y="384">
+  <object id="12" name="Enemy Spawn2" x="344.667" y="360">
    <point/>
   </object>
-  <object id="13" name="Enemy Spawn1" x="264" y="446.667">
+  <object id="13" name="Enemy Spawn1" x="264" y="425.333">
    <point/>
   </object>
-  <object id="14" name="Enemy Spawn5" x="696.667" y="352">
+  <object id="14" name="Enemy Spawn5" x="696" y="327.333">
    <point/>
   </object>
-  <object id="16" name="Enemy Spawn6" x="759.833" y="255.833">
+  <object id="16" name="Enemy Spawn6" x="761.167" y="232.5">
    <point/>
   </object>
-  <object id="17" name="Enemy Spawn9" x="1132.5" y="256">
+  <object id="17" name="Enemy Spawn9" x="1144.5" y="234">
    <point/>
   </object>
-  <object id="18" name="Enemy Spawn8" x="1070.67" y="464">
+  <object id="18" name="Enemy Spawn8" x="1080.67" y="440">
    <point/>
   </object>
-  <object id="19" name="Enemy Spawn7" x="888" y="464">
+  <object id="19" name="Enemy Spawn7" x="888.667" y="440">
    <point/>
   </object>
-  <object id="20" name="Enemy Spawn3" x="568" y="463.333">
+  <object id="20" name="Enemy Spawn3" x="568.667" y="438.667">
    <point/>
   </object>
-  <object id="21" name="Enemy Spawn4" x="730" y="462.667">
+  <object id="21" name="Enemy Spawn4" x="728.667" y="439.333">
    <point/>
   </object>
-  <object id="22" name="Enemy Spawn10" x="1384" y="463.333">
+  <object id="22" name="Enemy Spawn10" x="1385.33" y="440">
    <point/>
   </object>
  </objectgroup>

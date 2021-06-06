@@ -18,139 +18,194 @@ class Level2 extends Phaser.Scene {
         const bgLayer = map.createLayer('Background', bgset, 0, 0);
         const platformLayer = map.createLayer('Platfroms', tileset, 0, 0);
 
-        //Initialize Player's ammo
+        //Initialize Player's status
         this.playerHP = 100;
         this.ammoCount = 50;
+        let playerHurt = false;
         
         // platformLayer.setCollisionByProperty({ 
         //     collides: true 
         // });
         platformLayer.setCollisionByExclusion(-1, true);
 
+         //Play bgm
+         this.bgm = this.sound.add('bgm', {
+            mute: false,
+            volume: 0.3,
+            rate: 1.5,
+            loop: true 
+        });
+        this.bgm.play();
+
         const p1Spawn = map.findObject("Object", obj => obj.name === "P1 Spawn");
         player = new Player(this, p1Spawn.x, p1Spawn.y, 'player');
-        player.anims.play('idle');
+        // player.anims.play('idle');
 
-        //Crosshair and UI
+        // Crosshair and UI
         // this.p1 = this.add.sprite(0, 0, 'crosshair');
-      //  this.add.rectangle(16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setScrollFactor(0); 
+        // this.add.rectangle(16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setScrollFactor(0); 
         this.healthText = this.add.text(16, 16 ,`Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
-        
-        //this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0x00FF00).setScrollFactor(0);  
+        // this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0x00FF00).setScrollFactor(0);  
         this.ammoText = this.add.text(16, 32, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
 
         this.enemyGroup = this.add.group({
 
             runChildUpdate: true
         });
+        this.enemyWallsGroup = this.add.group({
+            runChildUpdate: true
+        });
 
-        // const enemySpawn = map.findObject("Object", obj => obj.name === "Enemy Spawn");
-        // enemy1 = new Enemy(this, enemySpawn.x, enemySpawn.y, 'enemy1');
-        // this.enemyGroup.add(enemy1);
-
-    
         this.addEnemy(map);
-        
+        this.addInvisibleWall();
      
         this.physics.world.gravity.y = 2000;
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
         this.physics.add.collider(player, platformLayer);
-        this.physics.add.collider(this.enemyGroup, platformLayer);
-        this.physics.add.collider(player.bulletGroup, platformLayer,(obj1, obj2)=> obj1.destroy());
+        // this.physics.add.collider(this.enemyGroup, platformLayer);
+        this.physics.add.collider(this.enemyGroup, platformLayer, (obj1, obj2) => {
+            obj1.changeDirection();
+        });
+        this.physics.add.collider(this.enemyGroup, this.enemyWallsGroup, (obj1, obj2) => {
+            obj1.changeDirection();
+        });
+        // this.physics.add.overlap(player, this.enemyGroup, this.takeDamage, null, this);
+        this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
+        this.physics.add.overlap(player, this.enemyGroup, (obj1, obj2) => {
+            if(playerHurt == false) {
+                this.playerHP -=100;
+                this.healthText.text = `Health: ${this.playerHP}`;
+                playerHurt = true;
+                obj2.changeDirection();
+                this.time.delayedCall(2000, () => {
+                    this.healthText.text = `Health: ${this.playerHP}`;
+                    playerHurt = false;
+                }, null, this);
+            }
+        });
+        this.physics.add.collider(player.bulletGroup, platformLayer,(obj1,obj2)=> obj1.destroy());
       
                 
         cursors = this.input.keyboard.createCursorKeys();
-        this.swap = this.input.keyboard.addKey('S');
+        // this.swap = this.input.keyboard.addKey('S');
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
+        this.input.on('pointerdown', (pointer) => {
+            if(pointer.leftButtonDown()) {
+                player.shoot(pointer);
+            }
+        });
+        
         // setup camera
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(player, true, 0.25, 0.25);
 
-        // Move to next level upon Collision
-         const Exit = map.findObject("Exit2", obj => obj.name === "nextLevel2");
-         this.transition = this.add.rectangle(Exit.x, Exit.y-50, Exit.width, Exit.height, 0xff6699);
-         this.physics.world.enable(this.transition);
-         this.transition.body.allowGravity = false;
+       // Move to next level upon Collision
+        const Exit = map.findObject("Exit2", obj => obj.name === "nextLevel2");
+        this.transition =this.add.rectangle(Exit.x,Exit.y-50,Exit.width,Exit.height, 0xff6699);
+        this.physics.world.enable(this.transition);
+        this.transition.body.allowGravity = false;
  
     }
 
     addEnemy(map) {
         for (let i=0;  i<10; i++) {
             const enemySpawn = map.findObject("Enemy2", obj => obj.name === "Enemy Spawn"+(i + 1).toString());
-            let movementSpeed = Phaser.Math.Between(0, 50);
-            enemy1 = new Enemy2(this, movementSpeed, enemySpawn.x, enemySpawn.y,);
+            enemy1 = new Enemy2(this, enemySpawn.x, enemySpawn.y, 'enemy2');
             this.enemyGroup.add(enemy1);
         }
     }
- 
 
- 
-    update() {
-        // this.input.on('pointermove', (pointer) =>{
-        //     this.p1.x = pointer.x;
-        //     this.p1.y = pointer.y;
-        //     })
-            player.update();
-            
-            //ammoCount gameOver
-            if(this.ammoCount <=0){
-                this.sound.stopAll();
-                this.scene.start("menuScene");
-              }
-            
-            this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
-            this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this)
-        
-            
-            //Move to next level upon Collision
-            this.physics.add.collider(player,this.transition, this.exitCall, null, this)
-        
-           if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-          this.scene.start("level3Scene");
-               }
+    addInvisibleWall() {
+        this.enemyWall = this.addWall(161, 240);
+        this.enemyWallsGroup.add(this.enemyWall);
+        this.enemyWall2 = this.addWall(214, 212);
+        this.enemyWallsGroup.add(this.enemyWall2);
+        this.enemyWall3 = this.addWall(454, 212);
+        this.enemyWallsGroup.add(this.enemyWall3);
+        this.enemyWall4 = this.addWall(294, 357);
+        this.enemyWallsGroup.add(this.enemyWall4);
+        this.enemyWall5 = this.addWall(1046, 260);
+        this.enemyWallsGroup.add(this.enemyWall5);
+        this.enemyWall6 = this.addWall(1384, 358);
+        this.enemyWallsGroup.add(this.enemyWall6);
+    }
+    // custom wall property
+    addWall(x, y) {
+        let wall = this.physics.add.sprite(x, y, 'crosshair').setOrigin(0.5).setScale(0.1, 0.3);
+        // wall.setOffset(18, 16);
+        wall.setVisible(false);
+        wall.setImmovable(true);
+        wall.body.allowGravity = false;
+        return wall;
     }
 
-    takeDamage(sprite, player){
-        console.log('hit');
-        this.playerHP -=15;
-        this.healthText.text = `Health: ${this.playerHP}`;  
-
-        //Send Player back to spawn point
-        player.setVelocity(0, 0);
-        player.setX(31.25);
-        player.setY(463.25);
-        player.anims.play('idle', true);
-        player.setAlpha(0);
-        let sendBack = this.tweens.add({
-            targets: player,
-            alpha: 1,
-            duration: 100,
-            ease: 'Linear',
-            repeat: 5,
-        }); 
-        this.cameras.main.shake(250, 0.0075);
-        if(this.playerHP <= 0)
-        {
+    update() {
+        player.update();
+        enemy1.update();
+        if(this.ammoCount<=0) {
             this.scene.start("menuScene");
         }
+        // if(this.playerHP <= 0) {
+        //     this.scene.start("menuScene");
+        // }            
+            
+        // this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
+        // this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
+        
+            
+        // Move to next level upon Collision
+        this.physics.add.collider(player,this.transition, this.exitCall, null, this)
+        
+        // if(Phaser.Input.Keyboard.JustDown(this.swap)) {
+        //     this.scene.start("level3Scene");
+        // }
     }
 
-    hitEnemy(sprite, bulletGroup) {
+    // takeDamage() {
+    //     console.log('hit');
+    //     if(playerHurt == false){
+    //         this.playerHP -=1;
+    //         this.healthText.text = `Health: ${this.playerHP}`;
+    //     } 
+
+    //     // Send Player back to spawn point on collison with enemy
+    //     // player.setVelocity(0, 0);
+    //     // player.setX(31.25);
+    //     // player.setY(463.25);
+    //     // player.anims.play('idle', true);
+    //     // player.setAlpha(0);
+    //     // let sendBack = this.tweens.add({
+    //     //     targets: player,
+    //     //     alpha: 1,
+    //     //     duration: 100,
+    //     //     ease: 'Linear',
+    //     //     repeat: 5,
+    //     // }); 
+    //     this.cameras.main.shake(250, 0.0075);
+    //     player.anims.play('hurt');
+    //     if(this.playerHP <= 0) {
+    //         this.scene.start("menuScene");
+    //     }
+    // }
+
+    hitEnemy(monster, bulletGroup) {
         console.log('hit');
-        sprite.hit();
+        monster.hit();
         bulletGroup.destroy();
-        if(sprite.isDead())
-        {
+        if(monster.isDead()) {
             this.ammoCount += 10
             this.ammoText.text = `Ammo: ${this.ammoCount}`;
         }  
     }
 
-  exitCall() {
-      console.log('exit');
-    this.scene.start("level3Scene");
-  }
+    exitCall() {
+        console.log('exit');
+        this.scene.start("level3Scene");
+    }
+
 
 }
-
-  

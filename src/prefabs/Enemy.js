@@ -13,25 +13,26 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         super (scene, x, y, texture, frame);
         scene.add.existing(this);           // add object to the existing scene
         scene.physics.add.existing(this);
-        this.setOrigin(0, 0);
+        this.setOrigin(0.5, 0.5);
         this.anims.play('enemyWalk', true)
-        // this.body.allowGravity = false;  //prevent sprite from falling
-        this.body.allowGravity = true;
+        this.body.allowGravity = false;  //prevent sprite from falling
+        // this.body.allowGravity = true;
         this.hP = 5; //set hitpoints
-        this.movementSpeed = 100;
+        this.movementSpeed = 50;
         this.setVelocityX(-this.movementSpeed);
+        this.enemyHurt = true;
         this.moveLeft = true;
-        this.setCollideWorldBounds(true);
+        this.body.setCollideWorldBounds(true);
         
     }
 
     update() {
-        // change direction of enemies
-        if(this.x < 0) {
-            this.setVelocityX(this.movementSpeed);
-        }else if(this.x > game.config.width - this.width) {
-            this.setVelocityX(-this.movementSpeed);
-        }
+        // // change direction of enemies
+        // if(this.x < 0) {
+        //     this.setVelocityX(this.movementSpeed);
+        // }else if(this.x > game.config.width - this.width) {
+        //     this.setVelocityX(-this.movementSpeed);
+        // }
     }
 
     changeDirection() {
@@ -48,17 +49,30 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     hit() {
-        this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
-            mute: false,
-            volume: 0.2,
-            rate: 1,
-            loop: false 
-        });
-        this.scene.bulletCollide.play();
-        console.log('hit2');
-        this.anims.play('enemyHurt', true)
-        this.hP = this.hP - 1
-        this.isDead();
+        if(this.enemyHurt == true) {
+            this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
+                mute: false,
+                volume: 0.2,
+                rate: 1,
+                loop: false 
+            });
+            this.scene.bulletCollide.play();
+            console.log('hit2');
+            // this.anims.play('enemyHurt', true);
+            this.hP = this.hP - 1
+            this.isDead();
+        }
+        // this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
+        //     mute: false,
+        //     volume: 0.2,
+        //     rate: 1,
+        //     loop: false 
+        // });
+        // this.scene.bulletCollide.play();
+        // console.log('hit2');
+        // this.anims.play('enemyHurt', true)
+        // this.hP = this.hP - 1
+        // this.isDead();
     }
 
     isDead() {

@@ -122,6 +122,18 @@ class Load extends Phaser.Scene {
             frameRate: 10
         });
         this.anims.create({
+            key: 'death',
+            frames: this.anims.generateFrameNames('player', {
+                prefix: 'death/death',
+                start: 1,
+                end: 6,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
             key: 'enemyIdle',
             frames: this.anims.generateFrameNames('enemy1', {
                 prefix: 'walk/enemy1walk',
