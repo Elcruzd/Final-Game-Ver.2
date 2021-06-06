@@ -23,6 +23,7 @@ class Load extends Phaser.Scene {
         this.load.image('platforms', 'prop pack.png')
         this.load.image('items', 'colored_packed.png')
         this.load.image('menuBackground', 'finalgametitle.png');
+        this.load.image('over', 'EndArt.png');
         // this.load.image('platforms2', 'tileset1.png')
        
        //Game assets
