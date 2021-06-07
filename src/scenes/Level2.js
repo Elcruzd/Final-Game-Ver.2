@@ -11,6 +11,13 @@ class Level2 extends Phaser.Scene {
     constructor() {
         super("level2Scene");
     } 
+
+    //Initalize Player's status based on previous level
+    init(L1playerHealth) {
+        this.playerHP = L1playerHealth;
+        this.ammoCount = 50;
+    }
+
     create() {
         const map = this.add.tilemap('map2');
         const bgset = map.addTilesetImage('background3', 'background3');
@@ -19,9 +26,6 @@ class Level2 extends Phaser.Scene {
         const bgLayer = map.createLayer('Background', bgset, 0, 0);
         const platformLayer = map.createLayer('Platfroms', tileset, 0, 0);
 
-        //Initialize Player's status
-        this.playerHP = 100;
-        this.ammoCount = 50;
         let playerHurt = false;
         
         // platformLayer.setCollisionByProperty({ 
@@ -49,6 +53,8 @@ class Level2 extends Phaser.Scene {
         const p1Spawn = map.findObject("Object", obj => obj.name === "P1 Spawn");
         player = new Player(this, p1Spawn.x, p1Spawn.y, 'player');
         // player.anims.play('idle');
+        
+        
 
         this.items = map.createFromObjects("Item2", {
             name: "heal",
@@ -238,7 +244,7 @@ class Level2 extends Phaser.Scene {
 
     exitCall() {
         console.log('exit');
-        this.scene.start("level3Scene");
+        this.scene.start("level3Scene", this.playerHP, this.ammoCount);
         this.sound.stopAll();
     }
 

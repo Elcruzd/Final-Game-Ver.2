@@ -11,6 +11,7 @@ class Level1 extends Phaser.Scene {
     constructor() {
         super("level1Scene");
     } 
+   
     create() {
         const map = this.add.tilemap('map1');
         const bgset = map.addTilesetImage('background', 'background');
@@ -19,7 +20,7 @@ class Level1 extends Phaser.Scene {
         const bgLayer = map.createLayer('Background', bgset, 0, 0);
         const platformLayer = map.createLayer('Platfroms', tileset, 0, 0);
 
-        //Initialize Player's status
+        //Initialize Player's status for the entire game
         this.playerHP = 100;
         this.ammoCount = 50;
         let playerHurt = false;
@@ -95,10 +96,10 @@ class Level1 extends Phaser.Scene {
         this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
         this.physics.add.overlap(player, this.enemyGroup, (obj1, obj2) => {
             if(playerHurt == false) {
-                this.playerHP -= 40;
+                this.playerHP -= 20;
                 this.healthText.text = `Health: ${this.playerHP}`;
                 playerHurt = true;
-                tthis.cameras.main.shake(250, 0.0075);
+                this.cameras.main.shake(250, 0.0075);
                 this.sfx = this.sound.add('hurt', {
                     mute: false,
                     volume: 0.1,
@@ -230,7 +231,7 @@ class Level1 extends Phaser.Scene {
 
     exitCall() {
         console.log('exit');
-        this.scene.start("level2Scene");
+        this.scene.start("level2Scene", this.playerHP, this.ammoCount);
         this.sound.stopAll();
     }
 }
