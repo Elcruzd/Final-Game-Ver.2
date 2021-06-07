@@ -20,7 +20,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.ACCELERATION = 500;
         this.MAX_X_VEL = 200;
         this.MAX_Y_VEL = 2000;
-        this.DRAG = 600;
+        this.DRAG = 6000;
         this.JUMP_VELOCITY = -600;
         this.setBounce(0.1);
         this.setImmovable();

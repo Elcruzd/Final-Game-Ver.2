@@ -3,8 +3,8 @@
 **       Nathan Pon - art, audio assets
 **       Jiahui Li - art, audio assets
 ** Porject: Final Game:
-** Game Title: 
-** Date: 
+** Game Title: Gundustrial Ascent
+** Date: 6/7/2021
 */
 
 class Credits extends Phaser.Scene {

@@ -3,8 +3,8 @@
 **       Nathan Pon - art, audio assets
 **       Jiahui Li - art, audio assets
 ** Porject: Final Game:
-** Game Title: 
-** Date: 
+** Game Title: Gundustrial Ascent
+** Date: 6/7/2021
 */
 
 class Level1 extends Phaser.Scene {
@@ -17,7 +17,7 @@ class Level1 extends Phaser.Scene {
         const tileset = map.addTilesetImage('prop pack', 'platforms');
         const tileset2 = map.addTilesetImage('colored_packed', 'items');
         const bgLayer = map.createLayer('Background', bgset, 0, 0);
-        const platformLayer = map.createLayer('Platfroms', tileset, 0, 0);
+        const platformLayer = map.createLayer('Platforms', tileset, 0, 0);
 
         //Initialize Player's status
         this.playerHP = 100;
@@ -52,12 +52,17 @@ class Level1 extends Phaser.Scene {
 
         this.items = map.createFromObjects("Item1", {
             name: "heal",
-            key: "items",
-            frame: 519
+            key: "fa",
+        });
+        this.items2 = map.createFromObjects("Item1", {
+            name: "bullet",
+            key: "refillAmmo",
         });
 
         this.physics.world.enable(this.items, Phaser.Physics.Arcade.STATIC_BODY);
         this.itemGroup = this.add.group(this.items);
+        this.physics.world.enable(this.items2, Phaser.Physics.Arcade.STATIC_BODY);
+        this.itemGroup2 = this.add.group(this.items2);
         // Crosshair and UI
         // this.p1 = this.add.sprite(0, 0, 'crosshair');
         // this.add.rectangle(16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setScrollFactor(0); 
@@ -84,6 +89,11 @@ class Level1 extends Phaser.Scene {
             this.playerHP +=50;
             this.healthText.text = `Health: ${this.playerHP}`;
         });
+        this.physics.add.overlap(player, this.itemGroup2, (obj1, obj2) => {
+            obj2.destroy();
+            this.ammoCount +=10;
+            this.ammoText.text = `Ammo: ${this.ammoCount}`;
+        });
         // this.physics.add.collider(this.enemyGroup, platformLayer);
         this.physics.add.collider(this.enemyGroup, platformLayer, (obj1, obj2) => {
             obj1.changeDirection();
@@ -98,14 +108,27 @@ class Level1 extends Phaser.Scene {
                 this.playerHP -= 40;
                 this.healthText.text = `Health: ${this.playerHP}`;
                 playerHurt = true;
-                tthis.cameras.main.shake(250, 0.0075);
+                this.cameras.main.shake(250, 0.0075);
                 this.sfx = this.sound.add('hurt', {
                     mute: false,
-                    volume: 0.1,
+                    volume: 0.3,
                     rate: 1,
                     loop: false 
                 });
                 this.sfx.play();
+                player.setVelocity(0, 0);
+                player.setX(31.25);
+                player.setY(463.25);
+                player.anims.play('idle', true);
+                player.setAlpha(0);
+                let sendBack = this.tweens.add({
+                    targets: player,
+                    alpha: 1,
+                    duration: 100,
+                    ease: 'Linear',
+                    repeat: 5,
+                }); 
+                // obj2.anims.play('enemyAttack');
                 obj2.changeDirection();
                 this.time.delayedCall(2000, () => {
                     this.healthText.text = `Health: ${this.playerHP}`;
@@ -152,7 +175,7 @@ class Level1 extends Phaser.Scene {
     addInvisibleWall() {
         this.enemyWall = this.addWall(161, 240);
         this.enemyWallsGroup.add(this.enemyWall);
-        this.enemyWall2 = this.addWall(214, 212);
+        this.enemyWall2 = this.addWall(235, 212);
         this.enemyWallsGroup.add(this.enemyWall2);
         this.enemyWall3 = this.addWall(454, 212);
         this.enemyWallsGroup.add(this.enemyWall3);
@@ -177,7 +200,7 @@ class Level1 extends Phaser.Scene {
         player.update();
         enemy1.update();
         if(this.ammoCount<=0) {
-            this.scene.start("endScene");
+            this.scene.start("end2Scene");
         }
         if(this.playerHP <= 0) {
             this.scene.start("endScene");
@@ -203,18 +226,18 @@ class Level1 extends Phaser.Scene {
     //     } 
 
     //     // Send Player back to spawn point on collison with enemy
-    //     // player.setVelocity(0, 0);
-    //     // player.setX(31.25);
-    //     // player.setY(463.25);
-    //     // player.anims.play('idle', true);
-    //     // player.setAlpha(0);
-    //     // let sendBack = this.tweens.add({
-    //     //     targets: player,
-    //     //     alpha: 1,
-    //     //     duration: 100,
-    //     //     ease: 'Linear',
-    //     //     repeat: 5,
-    //     // }); 
+        // player.setVelocity(0, 0);
+        // player.setX(31.25);
+        // player.setY(463.25);
+        // player.anims.play('idle', true);
+        // player.setAlpha(0);
+        // let sendBack = this.tweens.add({
+        //     targets: player,
+        //     alpha: 1,
+        //     duration: 100,
+        //     ease: 'Linear',
+        //     repeat: 5,
+        // }); 
     //     this.cameras.main.shake(250, 0.0075);
     //     player.anims.play('hurt');
     //     if(this.playerHP <= 0) {

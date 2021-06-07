@@ -7,9 +7,9 @@
 ** Date: 6/7/2021
 */
 
-class End extends Phaser.Scene {
+class End2 extends Phaser.Scene {
     constructor() {
-        super("endScene");
+        super("end2Scene");
     }
 
      create() {
@@ -27,6 +27,8 @@ class End extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+
+        this.add.text(game.config.width/2, game.config.height/2 - 32, 'OH NO! YOU HAVE 0 AMMO!', endConfig).setOrigin(0.5);
             
         this.playButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 32, game.config.width/4, borderUISize * 2, 0xFEEEBC)
         this.playButtonText = this.add.text(game.config.width/2, game.config.height/2 + 32, ' Play Again', endConfig).setOrigin(0.5);
@@ -42,8 +44,8 @@ class End extends Phaser.Scene {
             this.scene.start("level1Scene");
         })
 
-        this.returnButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 160, game.config.width/4, borderUISize * 2, 0xFEEEBC)
-        this.returnButtonText = this.add.text(game.config.width/2, game.config.height/2 + 160, 'Title Screen', endConfig).setOrigin(0.5);
+        this.returnButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 90, game.config.width/4, borderUISize * 2, 0xFEEEBC)
+        this.returnButtonText = this.add.text(game.config.width/2, game.config.height/2 + 90, 'Title Screen', endConfig).setOrigin(0.5);
         this.returnButtonOutline.setInteractive();
         this.returnButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {

@@ -18,7 +18,7 @@ class Enemy2 extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;  //prevent sprite from falling
         // this.body.allowGravity = true;
         this.hP = 15; //set hitpoints
-        this.movementSpeed = 50;
+        this.movementSpeed = 10;
         // this.setImmovable();
         this.setVelocityX(-this.movementSpeed);
         this.enemyHurt = true;

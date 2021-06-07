@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="33">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="37">
  <editorsettings>
   <export target="level1.json" format="json"/>
  </editorsettings>
@@ -46,7 +46,7 @@
 1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180
 </data>
  </layer>
- <layer id="2" name="Platfroms" width="100" height="30">
+ <layer id="2" name="Platforms" width="100" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -85,11 +85,6 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="6" name="Item1">
-  <object id="24" name="heal" gid="1828" x="400.667" y="368" width="16" height="16"/>
-  <object id="25" name="heal" gid="1828" x="737.333" y="462.667" width="16" height="16"/>
-  <object id="26" name="heal" gid="1828" x="1217.33" y="464" width="16" height="16"/>
- </objectgroup>
  <objectgroup id="4" name="Enemy1">
   <object id="9" name="Enemy Spawn1" x="87.5" y="233.333">
    <point/>
@@ -121,7 +116,13 @@
   <object id="22" name="Enemy Spawn10" x="1448.67" y="342.667">
    <point/>
   </object>
-  <object id="30" x="1384.67" y="358.667"/>
+  <object id="30" x="315.333" y="357.333"/>
+ </objectgroup>
+ <objectgroup id="6" name="Item1">
+  <object id="24" name="heal" gid="1828" x="400.667" y="368" width="16" height="16"/>
+  <object id="25" name="bullet" gid="1828" x="737.333" y="462.667" width="16" height="16"/>
+  <object id="36" name="heal" gid="1828" x="992" y="432" width="16" height="16"/>
+  <object id="26" name="bullet" gid="1828" x="1217.33" y="464" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="Exit">
   <object id="14" name="nextLevel" x="1576.33" y="238.666">

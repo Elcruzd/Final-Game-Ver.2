@@ -1,0 +1,398 @@
+{
+	"textures": [
+		{
+			"image": "enemy3.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 513,
+				"h": 128
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "attack/attack0001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 56,
+						"h": 68
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 51,
+						"h": 67
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 51,
+						"h": 67
+					}
+				},
+				{
+					"filename": "death/death0006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 28,
+						"h": 51
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 25,
+						"h": 51
+					},
+					"frame": {
+						"x": 1,
+						"y": 70,
+						"w": 25,
+						"h": 51
+					}
+				},
+				{
+					"filename": "attack/attack0003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 71,
+						"h": 66
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 71,
+						"h": 66
+					},
+					"frame": {
+						"x": 54,
+						"y": 1,
+						"w": 71,
+						"h": 66
+					}
+				},
+				{
+					"filename": "walk/walk0004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 60,
+						"h": 58
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 58,
+						"h": 58
+					},
+					"frame": {
+						"x": 54,
+						"y": 69,
+						"w": 58,
+						"h": 58
+					}
+				},
+				{
+					"filename": "walk/walk0003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 57,
+						"h": 58
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 57,
+						"h": 58
+					},
+					"frame": {
+						"x": 114,
+						"y": 69,
+						"w": 57,
+						"h": 58
+					}
+				},
+				{
+					"filename": "attack/attack0002.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 49,
+						"h": 66
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 49,
+						"h": 66
+					},
+					"frame": {
+						"x": 127,
+						"y": 1,
+						"w": 49,
+						"h": 66
+					}
+				},
+				{
+					"filename": "walk/walk0001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 56,
+						"h": 58
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 56,
+						"h": 58
+					},
+					"frame": {
+						"x": 173,
+						"y": 69,
+						"w": 56,
+						"h": 58
+					}
+				},
+				{
+					"filename": "attack/attack0004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 61,
+						"h": 66
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 59,
+						"h": 65
+					},
+					"frame": {
+						"x": 178,
+						"y": 1,
+						"w": 59,
+						"h": 65
+					}
+				},
+				{
+					"filename": "walk/walk0006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 52,
+						"h": 59
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 51,
+						"h": 59
+					},
+					"frame": {
+						"x": 231,
+						"y": 68,
+						"w": 51,
+						"h": 59
+					}
+				},
+				{
+					"filename": "death/death0003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 62,
+						"h": 65
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 54,
+						"h": 65
+					},
+					"frame": {
+						"x": 239,
+						"y": 1,
+						"w": 54,
+						"h": 65
+					}
+				},
+				{
+					"filename": "walk/walk0005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 55,
+						"h": 60
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 54,
+						"h": 58
+					},
+					"frame": {
+						"x": 284,
+						"y": 68,
+						"w": 54,
+						"h": 58
+					}
+				},
+				{
+					"filename": "death/death0004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 54,
+						"h": 65
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 52,
+						"h": 65
+					},
+					"frame": {
+						"x": 295,
+						"y": 1,
+						"w": 52,
+						"h": 65
+					}
+				},
+				{
+					"filename": "walk/walk0002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 54,
+						"h": 58
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 53,
+						"h": 58
+					},
+					"frame": {
+						"x": 340,
+						"y": 68,
+						"w": 53,
+						"h": 58
+					}
+				},
+				{
+					"filename": "death/death0002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 56,
+						"h": 65
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 55,
+						"h": 62
+					},
+					"frame": {
+						"x": 349,
+						"y": 1,
+						"w": 55,
+						"h": 62
+					}
+				},
+				{
+					"filename": "hurt/hurt0002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 59,
+						"h": 61
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 58,
+						"h": 60
+					},
+					"frame": {
+						"x": 395,
+						"y": 65,
+						"w": 58,
+						"h": 60
+					}
+				},
+				{
+					"filename": "hurt/hurt0001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 58,
+						"h": 61
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 56,
+						"h": 60
+					},
+					"frame": {
+						"x": 406,
+						"y": 1,
+						"w": 56,
+						"h": 60
+					}
+				},
+				{
+					"filename": "death/death0001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 57,
+						"h": 65
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 5,
+						"w": 55,
+						"h": 60
+					},
+					"frame": {
+						"x": 455,
+						"y": 63,
+						"w": 55,
+						"h": 60
+					}
+				},
+				{
+					"filename": "death/death0005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 53,
+						"h": 61
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 1,
+						"w": 48,
+						"h": 60
+					},
+					"frame": {
+						"x": 464,
+						"y": 1,
+						"w": 48,
+						"h": 60
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:f82e798a3dd788f58b63b418ccae6aa8:3e718e41757cdf9fb1abeb5f78ab1fe7:0373ad1e025d83d60aa1216dad0f0ef2$"
+	}
+}

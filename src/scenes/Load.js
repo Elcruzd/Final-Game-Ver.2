@@ -3,8 +3,8 @@
 **       Nathan Pon - art, audio assets
 **       Jiahui Li - art, audio assets
 ** Porject: Final Game:
-** Game Title: 
-** Date: 
+** Game Title: Gundustrial Ascent
+** Date: 6/7/2021
 */
 
 class Load extends Phaser.Scene {
@@ -18,10 +18,17 @@ class Load extends Phaser.Scene {
         // load images asset
         this.load.image('background', 'background.png')
         this.load.image('background1', 'background1.png')
+        this.load.image('bg', 'bg.png')
+        this.load.image('bg1', 'bg1.png')
+        this.load.image('bg2', 'bg2.png')
+        this.load.image('bg3', 'bg3.png')
         this.load.image('background3', 'background3.png')
         this.load.image('background4', 'background4.png')
         this.load.image('platforms', 'prop pack.png')
-        this.load.image('items', 'colored_packed.png')
+        // this.load.image('items', 'colored_packed.png')
+        this.load.image('items', 'colored_transparent_packed.png')
+        this.load.image('fa', 'FA.png')
+        this.load.image('refillAmmo', 'refill.png')
         this.load.image('menuBackground', 'finalgametitle.png');
         this.load.image('over', 'EndArt.png');
         // this.load.image('platforms2', 'tileset1.png')
@@ -43,10 +50,12 @@ class Load extends Phaser.Scene {
         this.load.audio('gunshot', 'gunshot.wav');
         this.load.audio('monsterHit', 'monsterHit.wav');
         this.load.audio('hurt', 'dead.wav');
+
         // load player atlas asset
         this.load.atlas('player', 'player.png', 'player.json');
         this.load.atlas('enemy1', 'enemy1.png', 'enemy1.json');
         this.load.atlas('enemy2', 'enemy2.png', 'enemy2.json');
+        this.load.atlas('enemy3', 'enemy3.png', 'enemy3.json');
 
         // create loading bar
         this.add.text(game.config.width / 2, (game.config.height / 2) - 50, 'Loading...').setOrigin(0.5);
@@ -248,6 +257,66 @@ class Load extends Phaser.Scene {
                 prefix: 'death/enemy2death',
                 start: 1,
                 end: 4,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy3Idle',
+            frames: this.anims.generateFrameNames('enemy3', {
+                prefix: 'walk/walk',
+                start: 1,
+                end: 1,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            // repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy3Walk',
+            frames: this.anims.generateFrameNames('enemy3', {
+                prefix: 'walk/walk',
+                start: 1,
+                end: 6,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy3Attack',
+            frames: this.anims.generateFrameNames('enemy3', {
+                prefix: 'attack/attack',
+                start: 1,
+                end: 4,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy3Hurt',
+            frames: this.anims.generateFrameNames('enemy3', {
+                prefix: 'hurt/hurt',
+                start: 1,
+                end: 2,
+                suffix: '.png',
+                zeroPad: 4,
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.anims.create({
+            key: 'enemy3Death',
+            frames: this.anims.generateFrameNames('enemy3', {
+                prefix: 'death/death',
+                start: 1,
+                end: 6,
                 suffix: '.png',
                 zeroPad: 4,
             }),

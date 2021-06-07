@@ -3,8 +3,8 @@
 **       Nathan Pon - art, audio assets
 **       Jiahui Li - art, audio assets
 ** Porject: Final Game:
-** Game Title: 
-** Date: 
+** Game Title: Gundustrial Ascent
+** Date: 6/7/2021
 */
 
 class Level2 extends Phaser.Scene {
@@ -17,7 +17,7 @@ class Level2 extends Phaser.Scene {
         const tileset = map.addTilesetImage('prop pack', 'platforms');
         const tileset2 = map.addTilesetImage('colored_packed', 'items');
         const bgLayer = map.createLayer('Background', bgset, 0, 0);
-        const platformLayer = map.createLayer('Platfroms', tileset, 0, 0);
+        const platformLayer = map.createLayer('Platforms', tileset, 0, 0);
 
         //Initialize Player's status
         this.playerHP = 100;
@@ -52,13 +52,11 @@ class Level2 extends Phaser.Scene {
 
         this.items = map.createFromObjects("Item2", {
             name: "heal",
-            key: "items",
-            frame: 519
+            key: "fa",
         });
         this.items2 = map.createFromObjects("Item2", {
             name: "bullet",
-            key: "items",
-            frame: 975
+            key: "refillAmmo",
         });
 
         this.physics.world.enable(this.items, Phaser.Physics.Arcade.STATIC_BODY);
@@ -107,17 +105,18 @@ class Level2 extends Phaser.Scene {
         this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
         this.physics.add.overlap(player, this.enemyGroup, (obj1, obj2) => {
             if(playerHurt == false) {
-                this.playerHP -= 10;
+                this.playerHP -= 5;
                 this.healthText.text = `Health: ${this.playerHP}`;
                 playerHurt = true;
                 this.cameras.main.shake(250, 0.0075);
                 this.sfx = this.sound.add('hurt', {
                     mute: false,
-                    volume: 0.1,
+                    volume: 0.3,
                     rate: 1,
                     loop: false 
                 });
                 this.sfx.play();
+                // obj2.anims.play('enemy2Attack');
                 obj2.changeDirection();
                 this.time.delayedCall(2000, () => {
                     this.healthText.text = `Health: ${this.playerHP}`;
@@ -185,7 +184,7 @@ class Level2 extends Phaser.Scene {
         player.update();
         // enemy2.update();
         if(this.ammoCount<=0) {
-            this.scene.start("endScene");
+            this.scene.start("end2Scene");
         }
         if(this.playerHP <= 0) {
             this.scene.start("endScene");
