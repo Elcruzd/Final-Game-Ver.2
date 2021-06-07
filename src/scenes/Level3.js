@@ -108,12 +108,12 @@ class Level3 extends Phaser.Scene {
         this.physics.add.collider(player, platformLayer);
         this.physics.add.overlap(player, this.itemGroup, (obj1, obj2) => {
             obj2.destroy();
-            this.playerHP +=40;
+            this.playerHP +=30;
             this.healthText.text = `Health: ${this.playerHP}`;
         });
         this.physics.add.overlap(player, this.itemGroup2, (obj1, obj2) => {
             obj2.destroy();
-            this.ammoCount +=60;
+            this.ammoCount +=40;
             this.ammoText.text = `Ammo: ${this.ammoCount}`;
         });
         // this.physics.add.collider(this.enemyGroup, platformLayer);

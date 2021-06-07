@@ -114,7 +114,7 @@ class Level2 extends Phaser.Scene {
         });
         this.physics.add.overlap(player, this.itemGroup2, (obj1, obj2) => {
             obj2.destroy();
-            this.ammoCount +=30;
+            this.ammoCount +=35;
             this.ammoText.text = `Ammo: ${this.ammoCount}`;
         });
         // this.physics.add.collider(this.enemyGroup, platformLayer);
