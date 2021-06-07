@@ -19,7 +19,7 @@ class End2 extends Phaser.Scene {
         this.sound.stopAll();
         this.gameoverSound = this.sound.add('gameover', {
             mute: false,
-            volume: 0.2,
+            volume: 0.1,
             rate: 1,
             loop: false 
         });
