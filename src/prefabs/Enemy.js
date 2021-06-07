@@ -19,6 +19,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         // this.body.allowGravity = true;
         this.hP = 5; //set hitpoints
         this.movementSpeed = 50;
+        // this.setImmovable();
         this.setVelocityX(-this.movementSpeed);
         this.enemyHurt = true;
         this.moveLeft = true;

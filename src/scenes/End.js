@@ -28,10 +28,10 @@ class End extends Phaser.Scene {
             fixedWidth: 0
         }
             
-    this.playButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 32, game.config.width/2, borderUISize * 2, 0xFEEEBC)
-    this.playButtonText = this.add.text(game.config.width/2, game.config.height/2 + 32, ' Play Again', endConfig).setOrigin(0.5);
-    this.playButtonOutline.setInteractive();    
-       this.playButtonOutline.on('pointerdown', () => {
+        this.playButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 32, game.config.width/4, borderUISize * 2, 0xFEEEBC)
+        this.playButtonText = this.add.text(game.config.width/2, game.config.height/2 + 32, ' Play Again', endConfig).setOrigin(0.5);
+        this.playButtonOutline.setInteractive();    
+        this.playButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
                 volume: 0.2,
@@ -42,9 +42,9 @@ class End extends Phaser.Scene {
             this.scene.start("level1Scene");
         })
 
-     this.returnButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 160, borderUISize * 2, 0xFEEEBC)
-    this.returnButtonText = this.add.text(game.config.width/2, game.config.height/2 + 160, 'Title Screen', endConfig).setOrigin(0.5);
-      this.returnButtonOutline.setInteractive();
+        this.returnButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 160, game.config.width/4, borderUISize * 2, 0xFEEEBC)
+        this.returnButtonText = this.add.text(game.config.width/2, game.config.height/2 + 160, 'Title Screen', endConfig).setOrigin(0.5);
+        this.returnButtonOutline.setInteractive();
         this.returnButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
@@ -58,8 +58,8 @@ class End extends Phaser.Scene {
   
     }
 
- update() {
-    this.sound.stopAll();
+    update() {
+        this.sound.stopAll();
     }
 } 
     //     // if(localStorage.getItem('highscore') != null) {

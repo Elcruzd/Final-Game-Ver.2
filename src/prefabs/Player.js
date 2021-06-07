@@ -17,12 +17,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.playerHP = 100;
         this.ammoCount = 50;
-        
         this.ACCELERATION = 500;
         this.MAX_X_VEL = 200;
         this.MAX_Y_VEL = 2000;
         this.DRAG = 600;
-        this.JUMP_VELOCITY = -650;
+        this.JUMP_VELOCITY = -600;
         this.setBounce(0.1);
         this.setImmovable();
         this.body.setSize(this.width - 9, this.height);
@@ -69,7 +68,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(this.attack) {
             let bullet = this.scene.physics.add.sprite(player.x, player.y, 'fireball').setImmovable(true);
             bullet.body.setAllowGravity(false);
-            this.scene.physics.velocityFromAngle(Phaser.Math.RadToDeg(Phaser.Math.Angle.BetweenPoints(player, pointer)), 500, bullet.body.velocity);
+            this.scene.physics.velocityFromRotation(Phaser.Math.Angle.BetweenPoints(player, pointer), this.ACCELERATION, bullet.body.velocity);
             this.scene.sfx = this.scene.sound.add('gunshot', {
                 mute: false,
                 volume: 0.1,
@@ -95,15 +94,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // this.scene.physics.add.collider(this.scene.enemyGroup, this.scene.bulletGroup, this.scene.hitEnemy, null, this)
     }
     
-    isDead(){
-        if(this.scene.playerHP<=0){
-            this.scene.playerDead = this.scene.sound.add('dead', {
-                mute: false,
-                volume: 0.5,
-                rate: 1,
-                loop: false 
-            });
-            this.scene.playerDead.play();
-        } 
-    }
+    // isDead(){
+    //     if(this.scene.playerHP<=0){
+    //         this.scene.playerDead = this.scene.sound.add('dead', {
+    //             mute: false,
+    //             volume: 0.5,
+    //             rate: 1,
+    //             loop: false 
+    //         });
+    //         this.scene.playerDead.play();
+    //     } 
+    // }
 }

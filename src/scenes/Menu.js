@@ -32,8 +32,8 @@ class Menu extends Phaser.Scene {
         }
 
         // add play button
-        this.playButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 32, game.config.width/2, borderUISize * 2, 0xFEEEBC)
-        this.playButton = this.add.text(game.config.width/2, game.config.height/2 + 32, 'START GAME', menuConfig).setOrigin(0.5);
+        this.playButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 32, game.config.width/7, borderUISize * 1.5, 0xFEEEBC)
+        this.playButton = this.add.text(game.config.width/2, game.config.height/2 + 32, 'START', menuConfig).setOrigin(0.5);
         // set interactive that can go to the play scene
         this.playButtonOutline.setInteractive();
         this.playButtonOutline.on('pointerdown', () => {
@@ -44,14 +44,15 @@ class Menu extends Phaser.Scene {
                 loop: false 
             });
             this.selectSound.play();
-            this.scene.start('level1Scene');
+            this.scene.start('level2Scene');
         })
 
         // add credits button
-        this.creditsButton = this.add.text(game.config.width/2, game.config.height/2 + 190, 'CLICK TO VIEW CREDITS', menuConfig).setOrigin(0.5);
+        this.creditsButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 72, game.config.width/7, borderUISize * 1.5, 0xFEEEBC)
+        this.creditsButton = this.add.text(game.config.width/2, game.config.height/2 + 72, 'CREDITS', menuConfig).setOrigin(0.5);
         // set interactive that can go to the play scene
-        this.creditsButton.setInteractive();
-        this.creditsButton.on('pointerdown', () => {
+        this.creditsButtonOutline.setInteractive();
+        this.creditsButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
                 volume: 0.2,

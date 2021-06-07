@@ -42,7 +42,7 @@ class Load extends Phaser.Scene {
         this.load.audio('bgm', 'bgm.wav');
         this.load.audio('gunshot', 'gunshot.wav');
         this.load.audio('monsterHit', 'monsterHit.wav');
-        this.load.audio('dead', 'dead.wav');
+        this.load.audio('hurt', 'dead.wav');
         // load player atlas asset
         this.load.atlas('player', 'player.png', 'player.json');
         this.load.atlas('enemy1', 'enemy1.png', 'enemy1.json');
