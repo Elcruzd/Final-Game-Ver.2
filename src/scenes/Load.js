@@ -31,6 +31,7 @@ class Load extends Phaser.Scene {
         this.load.image('refillAmmo', 'refill.png')
         this.load.image('menuBackground', 'finalgametitle.png');
         this.load.image('over', 'EndArt.png');
+        this.load.image('over2', 'endBg.png');
         // this.load.image('platforms2', 'tileset1.png')
        
        //Game assets

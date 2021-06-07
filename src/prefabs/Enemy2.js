@@ -17,7 +17,7 @@ class Enemy2 extends Phaser.Physics.Arcade.Sprite {
         this.anims.play('enemy2Walk', true)
         this.body.allowGravity = false;     // prevent sprite from falling
         this.hP = 15;                       // set hitpoints
-        this.movementSpeed = 10;            // set enemy1 movement speed
+        this.movementSpeed = 10;            // set enemy2 movement speed
         // this.setImmovable();
         this.setVelocityX(-this.movementSpeed);
         this.enemyHurt = true;
@@ -27,16 +27,10 @@ class Enemy2 extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        // // change direction of enemies
-        // if(this.x < 0) {
-        //     this.setVelocityX(this.movementSpeed);
-        // }else if(this.x > game.config.width - this.width) {
-        //     this.setVelocityX(-this.movementSpeed);
-        // }
     }
 
     changeDirection() {
-        // check if monster moving the right direction and flip their body
+        // check if enemy2 moving the right direction and flip their body
         if(this.moveLeft == true) {
             this.moveLeft = false;
             this.setVelocityX(-this.movementSpeed);
@@ -49,6 +43,7 @@ class Enemy2 extends Phaser.Physics.Arcade.Sprite {
     }
 
     hit() {
+        // check if enemy2 is damaged
         if(this.enemyHurt == true) {
             this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
                 mute: false,
@@ -62,21 +57,10 @@ class Enemy2 extends Phaser.Physics.Arcade.Sprite {
             this.hP = this.hP - 1
             this.isDead();
         }
-        // this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
-        //     mute: false,
-        //     volume: 0.2,
-        //     rate: 1,
-        //     loop: false 
-        // });
-        // this.scene.bulletCollide.play();
-        // console.log('hit2');
-        // this.anims.play('enemyHurt', true)
-        // this.hP = this.hP - 1
-        // this.isDead();
     }
 
     isDead() {
-        // Destroy sprite in multiple hits
+        // Destroy enemy2 in multiple hits
         if(this.hP <= 0) {
             this.destroy();
         }

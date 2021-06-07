@@ -10,7 +10,14 @@
 class Level2 extends Phaser.Scene {
     constructor() {
         super("level2Scene");
-    } 
+    }
+
+    //Initialize Player's status based on previous level
+    init(data) {
+        this.playerHP = data.playerHP;
+        this.ammoCount = data.ammoCount;
+    }
+
     create() {
         // add a tile map
         const map = this.add.tilemap('map2');
@@ -23,8 +30,6 @@ class Level2 extends Phaser.Scene {
         const platformLayer = map.createLayer('Platforms', tileset, 0, 0);
 
         //Initialize Player's status
-        this.playerHP = 100;
-        this.ammoCount = 50;
         let playerHurt = false;
         
         // set map collision
@@ -71,6 +76,12 @@ class Level2 extends Phaser.Scene {
         this.physics.world.enable(this.items2, Phaser.Physics.Arcade.STATIC_BODY);
         this.itemGroup2 = this.add.group(this.items2);
 
+        // Move to next level upon Collision
+        const Exit = map.findObject("Exit2", obj => obj.name === "nextLevel2");
+        this.transition =this.add.rectangle(Exit.x,Exit.y-50,Exit.width,Exit.height, 0xff6699);
+        this.physics.world.enable(this.transition);
+        this.transition.body.allowGravity = false;
+
         // player HP and Ammo and UI
         this.healthText = this.add.text(16, 16 ,`Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
         this.ammoText = this.add.text(16, 32, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
@@ -98,7 +109,7 @@ class Level2 extends Phaser.Scene {
         this.physics.add.collider(player, platformLayer);
         this.physics.add.overlap(player, this.itemGroup, (obj1, obj2) => {
             obj2.destroy();
-            this.playerHP +=50;
+            this.playerHP +=20;
             this.healthText.text = `Health: ${this.playerHP}`;
         });
         this.physics.add.overlap(player, this.itemGroup2, (obj1, obj2) => {
@@ -131,21 +142,21 @@ class Level2 extends Phaser.Scene {
                 this.sfx.play();
 
                 // Send Player back to spawn point on collison with enemy
-                player.setVelocity(0, 0);
-                player.setX(17.42);
-                player.setY(292.25);
-                player.anims.play('idle', true);
-                player.setAlpha(0);
-                let sendBack = this.tweens.add({
-                    targets: player,
-                    alpha: 1,
-                    duration: 100,
-                    ease: 'Linear',
-                    repeat: 5,
-                }); 
+                // player.setVelocity(0, 0);
+                // player.setX(17.42);
+                // player.setY(292.25);
+                // player.anims.play('idle', true);
+                // player.setAlpha(0);
+                // let sendBack = this.tweens.add({
+                //     targets: player,
+                //     alpha: 1,
+                //     duration: 100,
+                //     ease: 'Linear',
+                //     repeat: 5,
+                // }); 
                 // obj2.anims.play('enemy2Attack');
-                obj2.changeDirection();
-                this.time.delayedCall(2000, () => {
+                // obj2.changeDirection();
+                this.time.delayedCall(1000, () => {
                     this.healthText.text = `Health: ${this.playerHP}`;
                     playerHurt = false;
                 }, null, this);
@@ -171,12 +182,6 @@ class Level2 extends Phaser.Scene {
         // setup camera
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(player, true, 0.25, 0.25);
-
-       // Move to next level upon Collision
-        const Exit = map.findObject("Exit2", obj => obj.name === "nextLevel2");
-        this.transition =this.add.rectangle(Exit.x,Exit.y-50,Exit.width,Exit.height, 0xff6699);
-        this.physics.world.enable(this.transition);
-        this.transition.body.allowGravity = false;
     }
 
     // add enemy2
@@ -235,7 +240,7 @@ class Level2 extends Phaser.Scene {
     // check player and exit door collision
     exitCall() {
         console.log('exit');
-        this.scene.start("level3Scene");
+        this.scene.start("level3Scene", {playerHP: this.playerHP, ammoCount: this.ammoCount});
         this.sound.stopAll();
     }
 }

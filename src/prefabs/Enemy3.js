@@ -12,13 +12,12 @@ class Enemy3 extends Phaser.Physics.Arcade.Sprite {
         // call Phaser Physics Sprite constructor
         super (scene, x, y, texture, frame);
         scene.add.existing(this);           // add object to the existing scene
-        scene.physics.add.existing(this);
+        scene.physics.add.existing(this);   // add to physics system
         this.setOrigin(0.5, 0.5);
         this.anims.play('enemy3Walk', true)
-        this.body.allowGravity = false;  //prevent sprite from falling
-        // this.body.allowGravity = true;
-        this.hP = 20; //set hitpoints
-        this.movementSpeed = 50;
+        this.body.allowGravity = false;     // prevent sprite from falling
+        this.hP = 10;                       // set hitpoints
+        this.movementSpeed = 50;            // set enemy1 movement speed
         // this.setImmovable();
         this.body.setSize(this.width - 9, this.height - 20);
         this.setVelocityX(-this.movementSpeed);
@@ -29,16 +28,10 @@ class Enemy3 extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        // // change direction of enemies
-        // if(this.x < 0) {
-        //     this.setVelocityX(this.movementSpeed);
-        // }else if(this.x > game.config.width - this.width) {
-        //     this.setVelocityX(-this.movementSpeed);
-        // }
     }
 
     changeDirection() {
-        // check if monster moving the right direction and flip their body
+        // check if enemy3 moving the right direction and flip their body
         if(this.moveLeft == true) {
             this.moveLeft = false;
             this.setVelocityX(-this.movementSpeed);
@@ -51,6 +44,7 @@ class Enemy3 extends Phaser.Physics.Arcade.Sprite {
     }
 
     hit() {
+        // check if enemy3 is damaged
         if(this.enemyHurt == true) {
             this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
                 mute: false,
@@ -64,21 +58,10 @@ class Enemy3 extends Phaser.Physics.Arcade.Sprite {
             this.hP = this.hP - 1
             this.isDead();
         }
-        // this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
-        //     mute: false,
-        //     volume: 0.2,
-        //     rate: 1,
-        //     loop: false 
-        // });
-        // this.scene.bulletCollide.play();
-        // console.log('hit2');
-        // this.anims.play('enemyHurt', true)
-        // this.hP = this.hP - 1
-        // this.isDead();
     }
 
     isDead() {
-        // Destroy sprite in multiple hits
+        // Destroy enemy3 in multiple hits
         if(this.hP <= 0) {
             this.destroy();
         }

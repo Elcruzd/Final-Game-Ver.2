@@ -13,7 +13,7 @@ class End3 extends Phaser.Scene {
     }
 
      create() {
-         this.add.image(0, 0, 'endBg').setOrigin(0, 0);
+         this.add.image(0, 0, 'over2').setOrigin(0, 0);
    
          // add game over text
         let endConfig = {
@@ -28,7 +28,7 @@ class End3 extends Phaser.Scene {
             fixedWidth: 0
         }
 
-        this.add.text(game.config.width/2, game.config.height/2 - 32, 'YOU WIN', endConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - 32, 'YOU WIN!', endConfig).setOrigin(0.5);
             
         this.playButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 32, game.config.width/4, borderUISize * 2, 0xFEEEBC)
         this.playButtonText = this.add.text(game.config.width/2, game.config.height/2 + 32, ' Play Again', endConfig).setOrigin(0.5);

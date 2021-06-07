@@ -21,7 +21,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            // debug: true,
             gravity: {
                 x: 0,
                 y: 0
@@ -29,7 +29,7 @@ let config = {
         }
     },
     // zoom: 2,
-    scene: [ Load, Menu, Credits, Level1, Level2, Level3, End, End2 ]
+    scene: [ Load, Menu, Credits, Level1, Level2, Level3, End, End2, End3 ]
 }
 // localStorage.clear();
 
