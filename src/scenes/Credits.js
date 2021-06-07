@@ -31,7 +31,7 @@ class Credits extends Phaser.Scene {
         this.backButton.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
-                volume: 0.2,
+                volume: 0.05,
                 rate: 1,
                 loop: false 
             });

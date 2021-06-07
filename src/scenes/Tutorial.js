@@ -33,7 +33,7 @@ class Tutorial extends Phaser.Scene {
         let tutorialConfig = {
             fontFamily: 'Tahoma',
             fontSize: '20px',
-            color: '#0000ff',
+            color: '#ffffff',
             align: 'right',
             padding: {
                 top: 5,
@@ -49,7 +49,7 @@ class Tutorial extends Phaser.Scene {
         this.backButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
-                volume: 0.2,
+                volume: 0.05,
                 rate: 1,
                 loop: false 
             });
@@ -65,7 +65,7 @@ class Tutorial extends Phaser.Scene {
         this.playButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
-                volume: 0.2,
+                volume: 0.05,
                 rate: 1,
                 loop: false 
             });

@@ -53,6 +53,7 @@ class Load extends Phaser.Scene {
         this.load.audio('gunshot', 'gunshot.wav');
         this.load.audio('monsterHit', 'monsterHit.wav');
         this.load.audio('hurt', 'dead.wav');
+        this.load.audio('jump2', 'jump.wav');
         this.load.audio('gameover', 'Game_Over_1.wav');
         this.load.audio('finalGameOver', 'finalGamOver.wav');
 

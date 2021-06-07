@@ -49,7 +49,7 @@ class Level2 extends Phaser.Scene {
          //Play bgm
          this.bgm = this.sound.add('bgm', {
             mute: false,
-            volume: 0.3,
+            volume: 0.1,
             rate: 1.5,
             loop: true 
         });
@@ -136,7 +136,7 @@ class Level2 extends Phaser.Scene {
                 this.cameras.main.shake(250, 0.0075);
                 this.sfx = this.sound.add('hurt', {
                     mute: false,
-                    volume: 0.3,
+                    volume: 0.2,
                     rate: 1,
                     loop: false 
                 });

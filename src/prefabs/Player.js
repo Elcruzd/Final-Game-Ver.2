@@ -60,6 +60,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         if(player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up) || Phaser.Input.Keyboard.JustDown(keyW)) {
             // player.body.setVelocityY(this.JUMP_VELOCITY);
+            this.scene.jumpSound = this.scene.sound.add('jump2', {
+                mute: false,
+                volume: 0.05,
+                rate: 1,
+                loop: false 
+            });
+            this.scene.jumpSound.play();
             if(player.body.onFloor()) {
                 this.canDoubleJump = false;
                 this.setVelocityY(this.JUMP_VELOCITY);
