@@ -15,8 +15,6 @@ class Menu extends Phaser.Scene {
     create() {
         // place menu background
          this.add.image(0, 0, 'menuBackground').setOrigin(0, 0);
-        // place logo
-        // this.add.image(game.config.width/2, game.config.height/4, 'logo').setOrigin(0.5);
         
         // menu text configuration
         let menuConfig = {
@@ -44,13 +42,13 @@ class Menu extends Phaser.Scene {
                 loop: false 
             });
             this.selectSound.play();
-            this.scene.start('level1Scene');
+            this.scene.start('tutorialScene');
         })
 
         // add credits button
         this.creditsButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 72, game.config.width/7, borderUISize * 1.5, 0xFEEEBC)
         this.creditsButton = this.add.text(game.config.width/2, game.config.height/2 + 72, 'CREDITS', menuConfig).setOrigin(0.5);
-        // set interactive that can go to the play scene
+        // set interactive that can go to the credits scene
         this.creditsButtonOutline.setInteractive();
         this.creditsButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
@@ -62,18 +60,8 @@ class Menu extends Phaser.Scene {
             this.selectSound.play();
             this.scene.start('creditScene');
         })
-        // add game instructions
-        this.add.text(game.config.width/2, game.config.height/2 + 160, 'USE ARROWS TO MOVE', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 140, 'MOVE MOUSE TO AIM AND CLICK TO SHOOT', menuConfig).setOrigin(0.5);
-        
-        // define keys
-        // cursors = this.input.keyboard.createCursorKeys();
-        
     }
 
     update() {
-    //     if(cursors.right.isDown) {
-    //         this.scene.start('playScene');
-    //     }
     }
 }

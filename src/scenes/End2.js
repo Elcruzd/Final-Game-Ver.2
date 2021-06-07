@@ -14,6 +14,16 @@ class End2 extends Phaser.Scene {
 
      create() {
          this.add.image(0, 0, 'over').setOrigin(0, 0);
+
+         // stop bgm and play 'gameover' audio
+        this.sound.stopAll();
+        this.gameoverSound = this.sound.add('gameover', {
+            mute: false,
+            volume: 0.2,
+            rate: 1,
+            loop: false 
+        });
+        this.gameoverSound.play();
    
          // add game over text
         let endConfig = {
@@ -33,7 +43,7 @@ class End2 extends Phaser.Scene {
         this.playButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 32, game.config.width/4, borderUISize * 2, 0xFEEEBC)
         this.playButtonText = this.add.text(game.config.width/2, game.config.height/2 + 32, ' Play Again', endConfig).setOrigin(0.5);
         this.playButtonOutline.setInteractive();    
-        this.playButtonOutline.on('pointerdown', () => {
+        this.playButton = this.playButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
                 volume: 0.2,
@@ -41,13 +51,14 @@ class End2 extends Phaser.Scene {
                 loop: false 
             });
             this.selectSound.play();
-            this.scene.start("level1Scene");
-        })
+            playAgain = true;
+            // this.scene.start("level1Scene");
+        }, this);
 
         this.returnButtonOutline = this.add.rectangle(game.config.width/2, game.config.height/2 + 90, game.config.width/4, borderUISize * 2, 0xFEEEBC)
         this.returnButtonText = this.add.text(game.config.width/2, game.config.height/2 + 90, 'Title Screen', endConfig).setOrigin(0.5);
         this.returnButtonOutline.setInteractive();
-        this.returnButtonOutline.on('pointerdown', () => {
+        this.returnButton = this.returnButtonOutline.on('pointerdown', () => {
             this.selectSound = this.sound.add('select', {
                 mute: false,
                 volume: 0.2,
@@ -55,13 +66,22 @@ class End2 extends Phaser.Scene {
                 loop: false 
             });
             this.selectSound.play();
-            this.scene.start("menuScene");
-        })
-  
+            returnMenu = true;
+            // this.scene.start("menuScene");
+        }, this);
     }
 
     update() {
-        this.sound.stopAll();
+        if(playAgain == true) {
+            playAgain = false;
+            this.sound.stopAll();   // stop 'gameover' audio
+            this.scene.start("level1Scene");
+        }
+        if(returnMenu == true) {
+            returnMenu = false;
+            this.sound.stopAll();   // stop 'gameover' audio
+            this.scene.start("menuScene");
+        }
     }
 } 
      

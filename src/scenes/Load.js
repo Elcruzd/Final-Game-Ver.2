@@ -32,6 +32,8 @@ class Load extends Phaser.Scene {
         this.load.image('menuBackground', 'finalgametitle.png');
         this.load.image('over', 'EndArt.png');
         this.load.image('over2', 'endBg.png');
+        this.load.image('pickupFA', 'pickupFA.png');
+        this.load.image('pickupRefill', 'pickupRefill.png');
         // this.load.image('platforms2', 'tileset1.png')
        
        //Game assets
@@ -51,6 +53,8 @@ class Load extends Phaser.Scene {
         this.load.audio('gunshot', 'gunshot.wav');
         this.load.audio('monsterHit', 'monsterHit.wav');
         this.load.audio('hurt', 'dead.wav');
+        this.load.audio('gameover', 'Game_Over_1.wav');
+        this.load.audio('finalGameOver', 'finalGamOver.wav');
 
         // load player atlas asset
         this.load.atlas('player', 'player.png', 'player.json');

@@ -35,12 +35,12 @@ class Level1 extends Phaser.Scene {
         platformLayer.setCollisionByExclusion(-1, true);
 
         // define a render debug so we can see the tilemap's collision bounds
-        const debugGraphics = this.add.graphics().setAlpha(0.75);
-        platformLayer.renderDebug(debugGraphics, {
-            tileColor: null,    // color of non-colliding tiles
-            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),    // color of colliding tiles
-            faceColor: new Phaser.Display.Color(40, 39, 37, 255)                // color of colliding face edges
-        });
+        // const debugGraphics = this.add.graphics().setAlpha(0.75);
+        // platformLayer.renderDebug(debugGraphics, {
+        //     tileColor: null,    // color of non-colliding tiles
+        //     collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),    // color of colliding tiles
+        //     faceColor: new Phaser.Display.Color(40, 39, 37, 255)                // color of colliding face edges
+        // });
         
          //Play bgm
          this.bgm = this.sound.add('bgm', {
@@ -79,7 +79,7 @@ class Level1 extends Phaser.Scene {
         this.transition.body.allowGravity = false;
         
         // player HP and Ammo and UI
-        this.healthText = this.add.text(16, 16 ,`Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);  
+        this.healthText = this.add.text(16, 16 ,`Health: ${this.playerHP}`, { fontSize: '16px', fill: '#ff0000' }).setScrollFactor(0);  
         this.ammoText = this.add.text(16, 32, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
 
         // set up enemy1 group
@@ -128,6 +128,7 @@ class Level1 extends Phaser.Scene {
                 this.playerHP -= 20;
                 this.healthText.text = `Health: ${this.playerHP}`;
                 playerHurt = true;
+                obj2.anims.play('enemyAttack');
                 this.cameras.main.shake(250, 0.0075);
                 this.sfx = this.sound.add('hurt', {
                     mute: false,
@@ -137,6 +138,7 @@ class Level1 extends Phaser.Scene {
                 });
                 this.sfx.play();
 
+                // uncomment this if you want more challenges
                 // Send Player back to spawn point on collison with enemy
                 // player.setVelocity(0, 0);
                 // player.setX(33.25);
@@ -150,10 +152,8 @@ class Level1 extends Phaser.Scene {
                 //     ease: 'Linear',
                 //     repeat: 5,
                 // }); 
-                // obj2.anims.play('enemyAttack');
-                // obj2.changeDirection();
                 
-                this.time.delayedCall(1000, () => {
+                this.time.delayedCall(500, () => {
                     this.healthText.text = `Health: ${this.playerHP}`;
                     playerHurt = false;
                 }, null, this);
@@ -168,17 +168,11 @@ class Level1 extends Phaser.Scene {
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-
-        // define left mouse click
-        this.input.on('pointerdown', (pointer) => {
-            if(pointer.leftButtonDown()) {
-                player.shoot(pointer);
-            }
-        });
         
         // setup camera
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(player, true, 0.25, 0.25);
+        player.getCamera(this.cameras.main);
     }
 
     // add enemy1

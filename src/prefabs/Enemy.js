@@ -62,6 +62,10 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     isDead() {
         // Destroy enemy1 in multiple hits
         if(this.hP <= 0) {
+            // this.anims.play('enemyDeath', true);
+            // this.scene.time.delayedCall(100, () => {
+            //     this.destroy();
+            // }, null, this);
             this.destroy();
         }
     }

@@ -19,6 +19,7 @@ class Enemy2 extends Phaser.Physics.Arcade.Sprite {
         this.hP = 15;                       // set hitpoints
         this.movementSpeed = 10;            // set enemy2 movement speed
         // this.setImmovable();
+        this.body.setSize(this.width - 9, this.height - 20);
         this.setVelocityX(-this.movementSpeed);
         this.enemyHurt = true;
         this.moveLeft = true;
@@ -62,6 +63,10 @@ class Enemy2 extends Phaser.Physics.Arcade.Sprite {
     isDead() {
         // Destroy enemy2 in multiple hits
         if(this.hP <= 0) {
+            // this.anims.play('enemy2Death', true);
+            // this.scene.time.delayedCall(1000, () => {
+            //     this.destroy();
+            // }, null, this);
             this.destroy();
         }
     }

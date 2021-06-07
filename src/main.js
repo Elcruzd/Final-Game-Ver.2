@@ -21,7 +21,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            // debug: true,
+            debug: true,
             gravity: {
                 x: 0,
                 y: 0
@@ -29,7 +29,7 @@ let config = {
         }
     },
     // zoom: 2,
-    scene: [ Load, Menu, Credits, Level1, Level2, Level3, End, End2, End3 ]
+    scene: [ Load, Menu, Credits, Tutorial, Level1, Level2, Level3, End, End2, End3 ]
 }
 // localStorage.clear();
 
@@ -41,8 +41,11 @@ let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
 let cursors;
 let keyW, keyA, keyF, keyD, mouse;
+let mouseClick = false;
+let angle = 0;
 let player;
 let enemy1;
 let enemy2;
 let enemy3;
-// initialize score and high score
+let playAgain = false;
+let returnMenu = false;

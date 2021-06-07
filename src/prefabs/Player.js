@@ -16,8 +16,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setOrigin(0.5, 0.5);
         
         // player variables and settings
-        this.playerHP = 100;
-        this.ammoCount = 50;
         this.ACCELERATION = 500;
         this.MAX_X_VEL = 200;
         this.MAX_Y_VEL = 2000;
@@ -31,10 +29,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setCollideWorldBounds(true);
         this.attack = true;
         this.bulletGroup = scene.add.group();
-        // mouse = scene.input.on('pointerdown', (pointer) => {
-        //     this.shoot(pointer);
-        // })
-        // mouse = this.input.mousePointer;
+
+        // define left mouse click
+        mouse = scene.input.on('pointerdown', (pointer) => {
+            if(pointer.leftButtonDown()) {
+                player.shoot(pointer);
+            };
+            mouseClick = true;
+        });
     }
 
     update() {
@@ -63,13 +65,24 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 this.setVelocityY(this.JUMP_VELOCITY);
             }
         }
+        // if(mouseClick == true) {
+        //     mouseClick = false;
+        //     player.anims.play('attack');
+        // }
+    }
+
+    // get camera follow player instead of world
+    getCamera(camera) {
+        this.camera = camera;
     }
 
     shoot(pointer) {
         if(this.attack) {
+            angle = Phaser.Math.Angle.BetweenPoints({x: (player.x - this.camera.worldView.x) * this.camera.zoom, y: (player.y - this.camera.worldView.y) * this.camera.zoom}, pointer);
+            console.log(angle);
             let bullet = this.scene.physics.add.sprite(player.x, player.y, 'fireball').setImmovable(true);
             bullet.body.setAllowGravity(false);
-            this.scene.physics.velocityFromRotation(Phaser.Math.Angle.BetweenPoints(player, pointer), this.ACCELERATION, bullet.body.velocity);
+            this.scene.physics.velocityFromRotation(angle, this.ACCELERATION, bullet.body.velocity);
             this.scene.sfx = this.scene.sound.add('gunshot', {
                 mute: false,
                 volume: 0.1,
@@ -83,27 +96,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.scene.time.delayedCall(2000, () => {
                 bullet.destroy();       
             })
-
-            this.attack = false;
-            this.scene.time.delayedCall(100, () => {
-                this.attack = true;
-            })
+            
             this.scene.ammoCount -= 1
             this.scene.ammoText.text = `Ammo: ${this.scene.ammoCount}`;  
         }
         // //Bullet collison with enemies
         // this.scene.physics.add.collider(this.scene.enemyGroup, this.scene.bulletGroup, this.scene.hitEnemy, null, this)
     }
-    
-    // isDead(){
-    //     if(this.scene.playerHP<=0){
-    //         this.scene.playerDead = this.scene.sound.add('dead', {
-    //             mute: false,
-    //             volume: 0.5,
-    //             rate: 1,
-    //             loop: false 
-    //         });
-    //         this.scene.playerDead.play();
-    //     } 
-    // }
 }
