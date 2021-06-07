@@ -73,7 +73,7 @@ class Level2 extends Phaser.Scene {
         this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
         this.physics.add.overlap(player, this.enemyGroup, (obj1, obj2) => {
             if(playerHurt == false) {
-                this.playerHP -=100;
+                this.playerHP -=10;
                 this.healthText.text = `Health: ${this.playerHP}`;
                 playerHurt = true;
                 obj2.changeDirection();
@@ -82,6 +82,7 @@ class Level2 extends Phaser.Scene {
                     playerHurt = false;
                 }, null, this);
             }
+            this.cameras.main.shake(250, 0.0075);
         });
         this.physics.add.collider(player.bulletGroup, platformLayer,(obj1,obj2)=> obj1.destroy());
       
@@ -146,7 +147,8 @@ class Level2 extends Phaser.Scene {
     update() {
         player.update();
         enemy1.update();
-        if(this.ammoCount<=0) {
+        if(this.ammoCount<=0|| this.playerHP <=0) {
+            this.sound.stopAll();
             this.scene.start("menuScene");
         }
         // if(this.playerHP <= 0) {
