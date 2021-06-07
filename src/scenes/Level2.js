@@ -12,10 +12,13 @@ class Level2 extends Phaser.Scene {
         super("level2Scene");
     } 
     create() {
+        // add a tile map
         const map = this.add.tilemap('map2');
+        // add tile set to the map
         const bgset = map.addTilesetImage('background3', 'background3');
         const tileset = map.addTilesetImage('prop pack', 'platforms');
         const tileset2 = map.addTilesetImage('colored_packed', 'items');
+        // create map layers
         const bgLayer = map.createLayer('Background', bgset, 0, 0);
         const platformLayer = map.createLayer('Platforms', tileset, 0, 0);
 
@@ -24,6 +27,7 @@ class Level2 extends Phaser.Scene {
         this.ammoCount = 50;
         let playerHurt = false;
         
+        // set map collision
         // platformLayer.setCollisionByProperty({ 
         //     collides: true
         // });
@@ -46,10 +50,12 @@ class Level2 extends Phaser.Scene {
         });
         this.bgm.play();
 
+        // create player
         const p1Spawn = map.findObject("Object", obj => obj.name === "P1 Spawn");
         player = new Player(this, p1Spawn.x, p1Spawn.y, 'player');
         // player.anims.play('idle');
 
+        // generate items objects from object data
         this.items = map.createFromObjects("Item2", {
             name: "heal",
             key: "fa",
@@ -59,30 +65,36 @@ class Level2 extends Phaser.Scene {
             key: "refillAmmo",
         });
 
+        // then add the items to a group
         this.physics.world.enable(this.items, Phaser.Physics.Arcade.STATIC_BODY);
         this.itemGroup = this.add.group(this.items);
         this.physics.world.enable(this.items2, Phaser.Physics.Arcade.STATIC_BODY);
         this.itemGroup2 = this.add.group(this.items2);
-        // Crosshair and UI
-        // this.p1 = this.add.sprite(0, 0, 'crosshair');
-        // this.add.rectangle(16,borderUISize + borderPadding, game.config.width/4, borderUISize * 2,  0x00FF00).setScrollFactor(0); 
+
+        // player HP and Ammo and UI
         this.healthText = this.add.text(16, 16 ,`Health: ${this.playerHP}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
-        // this.add.rectangle(0,borderUISize + borderPadding, game.config.width/4, borderUISize * 2, 0x00FF00).setScrollFactor(0);  
         this.ammoText = this.add.text(16, 32, `Ammo: ${this.ammoCount}`, { fontSize: '16px', fill: '#000' }).setScrollFactor(0);
 
+        // set up enemy1 group
         this.enemyGroup = this.add.group({
 
             runChildUpdate: true
         });
+        // set up enemy wall group
         this.enemyWallsGroup = this.add.group({
             runChildUpdate: true
         });
 
+        // add enemy2 to map
         this.addEnemy(map);
+        // add wall to map
         this.addInvisibleWall();
      
+        // set gravity and physics world bounds
         this.physics.world.gravity.y = 2000;
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
+        
+        // create collider(s)/overlap(s)
         this.physics.add.collider(player, platformLayer);
         this.physics.add.overlap(player, this.itemGroup, (obj1, obj2) => {
             obj2.destroy();
@@ -104,6 +116,7 @@ class Level2 extends Phaser.Scene {
         // this.physics.add.overlap(player, this.enemyGroup, this.takeDamage, null, this);
         this.physics.add.overlap(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
         this.physics.add.overlap(player, this.enemyGroup, (obj1, obj2) => {
+            // check if player get hit by emeny1
             if(playerHurt == false) {
                 this.playerHP -= 5;
                 this.healthText.text = `Health: ${this.playerHP}`;
@@ -116,6 +129,20 @@ class Level2 extends Phaser.Scene {
                     loop: false 
                 });
                 this.sfx.play();
+
+                // Send Player back to spawn point on collison with enemy
+                player.setVelocity(0, 0);
+                player.setX(17.42);
+                player.setY(292.25);
+                player.anims.play('idle', true);
+                player.setAlpha(0);
+                let sendBack = this.tweens.add({
+                    targets: player,
+                    alpha: 1,
+                    duration: 100,
+                    ease: 'Linear',
+                    repeat: 5,
+                }); 
                 // obj2.anims.play('enemy2Attack');
                 obj2.changeDirection();
                 this.time.delayedCall(2000, () => {
@@ -126,7 +153,7 @@ class Level2 extends Phaser.Scene {
         });
         this.physics.add.collider(player.bulletGroup, platformLayer,(obj1,obj2)=> obj1.destroy());
       
-                
+        // define keyboard input and cursor input         
         cursors = this.input.keyboard.createCursorKeys();
         // this.swap = this.input.keyboard.addKey('S');
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -134,6 +161,7 @@ class Level2 extends Phaser.Scene {
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
+        // define left mouse click
         this.input.on('pointerdown', (pointer) => {
             if(pointer.leftButtonDown()) {
                 player.shoot(pointer);
@@ -149,9 +177,9 @@ class Level2 extends Phaser.Scene {
         this.transition =this.add.rectangle(Exit.x,Exit.y-50,Exit.width,Exit.height, 0xff6699);
         this.physics.world.enable(this.transition);
         this.transition.body.allowGravity = false;
- 
     }
 
+    // add enemy2
     addEnemy(map) {
         for (let i=0;  i<10; i++) {
             const enemySpawn = map.findObject("Enemy2", obj => obj.name === "Enemy Spawn"+(i + 1).toString());
@@ -159,7 +187,7 @@ class Level2 extends Phaser.Scene {
             this.enemyGroup.add(enemy2);
         }
     }
-
+    // add wall
     addInvisibleWall() {
         this.enemyWall = this.addWall(310, 372);
         this.enemyWallsGroup.add(this.enemyWall);
@@ -182,66 +210,34 @@ class Level2 extends Phaser.Scene {
 
     update() {
         player.update();
-        // enemy2.update();
+        enemy2.update();
+        
+        // check player ammo
         if(this.ammoCount<=0) {
             this.scene.start("end2Scene");
         }
+        // check player HP
         if(this.playerHP <= 0) {
             this.scene.start("endScene");
         }            
-            
-        // this.physics.add.collider(this.enemyGroup, player, this.takeDamage, null, this)
-        // this.physics.add.collider(this.enemyGroup, player.bulletGroup, this.hitEnemy, null, this);
-        
-            
+
         // Move to next level upon Collision
-        this.physics.add.collider(player,this.transition, this.exitCall, null, this)
-        
-        // if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-        //     this.scene.start("level3Scene");
-        // }
+        this.physics.add.collider(player,this.transition, this.exitCall, null, this);
     }
 
-    // takeDamage() {
-    //     console.log('hit');
-    //     if(playerHurt == false){
-    //         this.playerHP -=1;
-    //         this.healthText.text = `Health: ${this.playerHP}`;
-    //     } 
-
-    //     // Send Player back to spawn point on collison with enemy
-    //     // player.setVelocity(0, 0);
-    //     // player.setX(31.25);
-    //     // player.setY(463.25);
-    //     // player.anims.play('idle', true);
-    //     // player.setAlpha(0);
-    //     // let sendBack = this.tweens.add({
-    //     //     targets: player,
-    //     //     alpha: 1,
-    //     //     duration: 100,
-    //     //     ease: 'Linear',
-    //     //     repeat: 5,
-    //     // }); 
-    //     this.cameras.main.shake(250, 0.0075);
-    //     player.anims.play('hurt');
-    //     if(this.playerHP <= 0) {
-    //         this.scene.start("menuScene");
-    //     }
-    // }
-
+    // check bullet and enemy2 collision
     hitEnemy(monster, bulletGroup) {
         console.log('hit');
         monster.hit();
         bulletGroup.destroy();
     }
 
+    // check player and exit door collision
     exitCall() {
         console.log('exit');
         this.scene.start("level3Scene");
         this.sound.stopAll();
     }
-
-
 }
 
   

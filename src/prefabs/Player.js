@@ -14,7 +14,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);           // add object to the existing scene
         scene.physics.add.existing(this);   // add to physics system
         this.setOrigin(0.5, 0.5);
-
+        
+        // player variables and settings
         this.playerHP = 100;
         this.ammoCount = 50;
         this.ACCELERATION = 500;
@@ -28,7 +29,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setOffset(0, 0);
         this.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
         this.body.setCollideWorldBounds(true);
-
         this.attack = true;
         this.bulletGroup = scene.add.group();
         // mouse = scene.input.on('pointerdown', (pointer) => {
@@ -38,6 +38,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+        // player movement
         if(cursors.left.isDown || keyA.isDown) {
             player.body.setAccelerationX(-this.ACCELERATION);
             player.anims.play('run', true);

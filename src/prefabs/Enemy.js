@@ -12,13 +12,12 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         // call Phaser Physics Sprite constructor
         super (scene, x, y, texture, frame);
         scene.add.existing(this);           // add object to the existing scene
-        scene.physics.add.existing(this);
+        scene.physics.add.existing(this);   // add to physics system
         this.setOrigin(0.5, 0.5);
         this.anims.play('enemyWalk', true)
-        this.body.allowGravity = false;  //prevent sprite from falling
-        // this.body.allowGravity = true;
-        this.hP = 3; //set hitpoints
-        this.movementSpeed = 30;
+        this.body.allowGravity = false;     // prevent sprite from falling
+        this.hP = 3;                        // set hitpoints
+        this.movementSpeed = 30;            // set enemy1 movement speed
         // this.setImmovable();
         this.setVelocityX(-this.movementSpeed);
         this.enemyHurt = true;
@@ -37,7 +36,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     changeDirection() {
-        // check if monster moving the right direction and flip their body
+        // check if enemy1 moving the right direction and flip their body
         if(this.moveLeft == true) {
             this.moveLeft = false;
             this.setVelocityX(-this.movementSpeed);
@@ -50,6 +49,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     hit() {
+        // check if enemy1 is damaged
         if(this.enemyHurt == true) {
             this.scene.bulletCollide = this.scene.sound.add('monsterHit', {
                 mute: false,
@@ -77,7 +77,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     isDead() {
-        // Destroy sprite in multiple hits
+        // Destroy enemy1 in multiple hits
         if(this.hP <= 0) {
             this.destroy();
         }

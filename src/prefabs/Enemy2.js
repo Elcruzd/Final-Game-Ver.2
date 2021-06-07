@@ -12,13 +12,12 @@ class Enemy2 extends Phaser.Physics.Arcade.Sprite {
         // call Phaser Physics Sprite constructor
         super (scene, x, y, texture, frame);
         scene.add.existing(this);           // add object to the existing scene
-        scene.physics.add.existing(this);
+        scene.physics.add.existing(this);   // add to physics system
         this.setOrigin(0.5, 0.5);
         this.anims.play('enemy2Walk', true)
-        this.body.allowGravity = false;  //prevent sprite from falling
-        // this.body.allowGravity = true;
-        this.hP = 15; //set hitpoints
-        this.movementSpeed = 10;
+        this.body.allowGravity = false;     // prevent sprite from falling
+        this.hP = 15;                       // set hitpoints
+        this.movementSpeed = 10;            // set enemy1 movement speed
         // this.setImmovable();
         this.setVelocityX(-this.movementSpeed);
         this.enemyHurt = true;

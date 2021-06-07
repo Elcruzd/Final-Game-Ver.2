@@ -44,7 +44,7 @@ class Menu extends Phaser.Scene {
                 loop: false 
             });
             this.selectSound.play();
-            this.scene.start('level3Scene');
+            this.scene.start('level1Scene');
         })
 
         // add credits button
