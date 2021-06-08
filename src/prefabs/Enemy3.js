@@ -16,7 +16,7 @@ class Enemy3 extends Phaser.Physics.Arcade.Sprite {
         this.setOrigin(0.5, 0.5);
         this.anims.play('enemy3Walk', true)
         this.body.allowGravity = false;     // prevent sprite from falling
-        this.hP = 8;                       // set hitpoints
+        this.hP = 20;                       // set hitpoints
         this.movementSpeed = 50;            // set enemy1 movement speed
         // this.setImmovable();
         this.body.setSize(this.width - 9, this.height - 20);
